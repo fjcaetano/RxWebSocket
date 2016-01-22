@@ -52,7 +52,7 @@ public struct RxWebSocket {
       return socket.headers
     }
     set {
-      socket.headers = headers
+      socket.headers = newValue
     }
   }
   
@@ -61,7 +61,7 @@ public struct RxWebSocket {
       return socket.voipEnabled
     }
     set {
-      socket.voipEnabled = voipEnabled
+      socket.voipEnabled = newValue
     }
   }
   
@@ -70,7 +70,7 @@ public struct RxWebSocket {
       return socket.selfSignedSSL
     }
     set {
-      socket.selfSignedSSL = selfSignedSSL
+      socket.selfSignedSSL = newValue
     }
   }
   
@@ -79,7 +79,7 @@ public struct RxWebSocket {
       return socket.security
     }
     set {
-      socket.security = security
+      socket.security = newValue
     }
   }
   
@@ -88,7 +88,7 @@ public struct RxWebSocket {
       return socket.enabledSSLCipherSuites
     }
     set {
-      socket.enabledSSLCipherSuites = enabledSSLCipherSuites
+      socket.enabledSSLCipherSuites = newValue
     }
   }
   
@@ -100,16 +100,11 @@ public struct RxWebSocket {
   private let socket: WebSocket
   
   public init(url: NSURL, protocols: [String]? = nil) {
-    if let protocols = protocols {
-      socket = WebSocket(url: url, protocols: protocols)
-    }
-    else {
-      socket = WebSocket(url: url)
-    }
-    
-    
     let publish = PublishSubject<StreamEvent>()
     publishStream = publish
+    
+    
+    socket = WebSocket(url: url, protocols: protocols)
     
     socket.onConnect = { publish.onNext(.Connect) }
     socket.onDisconnect = { publish.onNext(.Disconnect($0)) }
@@ -149,6 +144,7 @@ public struct RxWebSocket {
   }
   
   public func connect() {
+    guard !socket.isConnected else { return }
     socket.connect()
   }
 }
