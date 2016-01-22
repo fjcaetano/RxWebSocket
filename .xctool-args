@@ -1,0 +1,6 @@
+[
+"-workspace", "Example/RxWebsocket.xcworkspace",
+"-scheme", "RxWebSocket-Example",
+"-sdk", "iphonesimulator",
+"-arch", "i386"
+]

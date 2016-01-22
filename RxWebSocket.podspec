@@ -19,12 +19,17 @@ Pod::Spec.new do |s|
   s.description      = <<-DESC
                        DESC
 
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/RxWebSocket"
+  s.homepage         = "https://github.com/fjcaetano/RxWebSocket"
   s.license          = 'MIT'
   s.author           = { "Flávio Caetano" => "flavio@vieiracaetano.com" }
   s.source           = { :git => "https://github.com/fjcaetano/RxWebSocket.git", :tag => s.version.to_s }
+  s.social_media_url = 'http://twitter.com/flavio_caetano'
 
-  s.platform     = :ios, '8.0'
+  s.ios.deployment_target = '8.0'
+  s.osx.deployment_target = '10.9'
+  s.watchos.deployment_target = '2.0'
+  s.tvos.deployment_target = '9.0'
+
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
@@ -32,6 +37,6 @@ Pod::Spec.new do |s|
 
 # Dependencies
 
-  s.dependency 'RxSwift', '~> 2.1.0'
+  s.dependency 'RxCocoa', '~> 2.1.0'
   s.dependency 'Starscream', '~> 1.1.1'
 end

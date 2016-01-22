@@ -3,8 +3,6 @@ use_frameworks!
 
 target 'RxWebSocket_Example', :exclusive => true do
   pod "RxWebSocket", :path => "../"
-  
-  pod 'RxCocoa',    '~> 2.0'
 end
 
 target 'RxWebSocket_Tests', :exclusive => true do

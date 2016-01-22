@@ -1,15 +1,9 @@
 # RxWebSocket
 
-[![CI Status](http://img.shields.io/travis/Flávio Caetano/RxWebSocket.svg?style=flat)](https://travis-ci.org/Flávio Caetano/RxWebSocket)
+[![CI Status](http://img.shields.io/travis/fjcaetano/RxWebSocket.svg?style=flat)](https://travis-ci.org/fjcaetano/RxWebSocket)
 [![Version](https://img.shields.io/cocoapods/v/RxWebSocket.svg?style=flat)](http://cocoapods.org/pods/RxWebSocket)
 [![License](https://img.shields.io/cocoapods/l/RxWebSocket.svg?style=flat)](http://cocoapods.org/pods/RxWebSocket)
 [![Platform](https://img.shields.io/cocoapods/p/RxWebSocket.svg?style=flat)](http://cocoapods.org/pods/RxWebSocket)
-
-## Usage
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
 
 ## Installation
 
@@ -20,9 +14,11 @@ it, simply add the following line to your Podfile:
 pod "RxWebSocket"
 ```
 
-## Author
+## Usage
 
-Flávio Caetano, flavio@vieiracaetano.com
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
+
+### TODO
 
 ## License
 

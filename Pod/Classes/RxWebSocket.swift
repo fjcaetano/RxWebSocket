@@ -147,4 +147,12 @@ public struct RxWebSocket {
     guard !socket.isConnected else { return }
     socket.connect()
   }
+  
+  public func ping(data: NSData = NSData()) throws {
+    if !socket.isConnected {
+      throw RxWebSocketError(code: .NotConnected)
+    }
+    
+    socket.writePing(data)
+  }
 }
