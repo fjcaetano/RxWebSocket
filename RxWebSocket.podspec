@@ -17,6 +17,9 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!  
   s.description      = <<-DESC
+  Reactive extensions for websockets.
+
+  A lightweight abstraction layer over Starscream to make it reactive.
                        DESC
 
   s.homepage         = "https://github.com/fjcaetano/RxWebSocket"

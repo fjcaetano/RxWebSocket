@@ -4,6 +4,11 @@
 [![Version](https://img.shields.io/cocoapods/v/RxWebSocket.svg?style=flat)](http://cocoapods.org/pods/RxWebSocket)
 [![License](https://img.shields.io/cocoapods/l/RxWebSocket.svg?style=flat)](http://cocoapods.org/pods/RxWebSocket)
 [![Platform](https://img.shields.io/cocoapods/p/RxWebSocket.svg?style=flat)](http://cocoapods.org/pods/RxWebSocket)
+------
+
+Reactive extensions for websockets.
+
+A lightweight abstraction layer over [Starscream](https://github.com/daltoniam/Starscream) to make it reactive.
 
 ## Installation
 
@@ -17,8 +22,6 @@ pod "RxWebSocket"
 ## Usage
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-### TODO
 
 ## License
 
