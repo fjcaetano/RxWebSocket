@@ -29,7 +29,7 @@ public class RxWebSocketError: NSError {
     }
   }
   
-  init(code: ErrorCode) {
+  public init(code: ErrorCode) {
     super.init(domain: RxWebSocketError.Domain, code: code.rawValue, userInfo: [NSLocalizedDescriptionKey: code.description])
   }
 
