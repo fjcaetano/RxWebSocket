@@ -37,9 +37,9 @@ class ViewController: UIViewController {
         }
       }
       .map { _ in true }
-      .doOn(onNext: { [weak self] _ in
+      .doOnNext { [weak self] _ in
         self?.appendMessage("CONNECTED")
-      }, onError: nil, onCompleted: nil)
+    }
     
     let disconnect = socket.stream
       .filter {
@@ -49,18 +49,18 @@ class ViewController: UIViewController {
         }
       }
       .map { _ in false }
-      .doOn(onNext: { [weak self] _ in
+      .doOnNext { [weak self] _ in
         self?.appendMessage("DISCONNECTED")
-      }, onError: nil, onCompleted: nil)
-      
-      
-      Observable.of(connect, disconnect)
-        .merge()
-        .subscribeNext { [weak self] isConnected in
-          self?.connectButton.enabled = true
-          self?.connectButton.selected = isConnected
-          self?.sendButton.enabled = isConnected
-        }.addDisposableTo(disposeBag)
+    }
+    
+    
+    Observable.of(connect, disconnect)
+      .merge()
+      .subscribeNext { [weak self] isConnected in
+        self?.connectButton.enabled = true
+        self?.connectButton.selected = isConnected
+        self?.sendButton.enabled = isConnected
+      }.addDisposableTo(disposeBag)
     
     
     // Text events
@@ -112,7 +112,7 @@ class ViewController: UIViewController {
   private func appendMessage(message: String) {
     let currentText = textView.text
     textView.text = "\(currentText)\n\n\(message)"
-
+    
     textView.scrollRangeToVisible(NSMakeRange(textView.text.characters.count, 0))
     // lolwut? i know
     textView.scrollEnabled = false

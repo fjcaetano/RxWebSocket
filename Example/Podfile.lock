@@ -1,11 +1,11 @@
 PODS:
-  - RxCocoa (2.1.0):
-    - RxSwift (~> 2.0)
-  - RxSwift (2.1.0)
+  - RxCocoa (2.2.0):
+    - RxSwift (~> 2.2)
+  - RxSwift (2.2.0)
   - RxWebSocket (0.1.0):
-    - RxCocoa (~> 2.1.0)
-    - Starscream (~> 1.1.1)
-  - Starscream (1.1.1)
+    - RxCocoa (~> 2.2.0)
+    - Starscream (~> 1.1.2)
+  - Starscream (1.1.2)
 
 DEPENDENCIES:
   - RxWebSocket (from `../`)
@@ -15,9 +15,9 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  RxCocoa: 79b5feb8378545336e756a0a33fcf5e95050b71c
-  RxSwift: 110fb07f81c17c2c3b3254d168363057b1880d18
-  RxWebSocket: 16abc13d4fa9db20c5df3b27bef8d454f6b23cb3
-  Starscream: d74dd8d122a6abd244d8d5e51f32891c796d0827
+  RxCocoa: 42efb7a7145a8d1d5878e94ce48a580d29e0c796
+  RxSwift: b8a749f2204c6c7a5c29b306a9c3bc11d5b87c5b
+  RxWebSocket: 3a2e3cc951f291ade8eeb835647a1422e8919018
+  Starscream: 58a12fd35a3cb6aaa105716c2d42765f7c1c732f
 
 COCOAPODS: 0.39.0
