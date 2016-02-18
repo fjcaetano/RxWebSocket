@@ -15,9 +15,9 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		6BA553E948146619A0AA9511 /* Pods_RxWebSocket_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B807C4FF49F03353EBE468 /* Pods_RxWebSocket_Example.framework */; };
 		AF20E113034DF9D2BC56C46F /* Pods_RxWebSocket_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7B9455187D09BB44E30C3E /* Pods_RxWebSocket_Tests.framework */; };
-		F20910191C52C3A300FBF76E /* .xctool-args in Resources */ = {isa = PBXBuildFile; fileRef = F20910181C52C3A300FBF76E /* .xctool-args */; };
-		F27CA9C61C76209E009CFFF1 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = F27CA9C51C76209E009CFFF1 /* .travis.yml */; };
-		F27DB92D1C7505FF004E8101 /* CHANGELOG.md in Sources */ = {isa = PBXBuildFile; fileRef = F27DB92C1C7505FF004E8101 /* CHANGELOG.md */; };
+		F27CA9C81C7623C4009CFFF1 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = F27CA9C71C7623C4009CFFF1 /* .travis.yml */; };
+		F27CA9CC1C763A61009CFFF1 /* .xctool-args in Resources */ = {isa = PBXBuildFile; fileRef = F27CA9CB1C763A61009CFFF1 /* .xctool-args */; };
+		F27CA9CE1C763CF5009CFFF1 /* CHANGELOG.md in Sources */ = {isa = PBXBuildFile; fileRef = F27CA9CD1C763CF5009CFFF1 /* CHANGELOG.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,9 +49,9 @@
 		9D4ECB5754C9091FA52AF17B /* Pods-RxWebSocket_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxWebSocket_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxWebSocket_Example/Pods-RxWebSocket_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		B2B6230C1705BD1ACA573CA2 /* Pods-RxWebSocket_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxWebSocket_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-RxWebSocket_Example/Pods-RxWebSocket_Example.release.xcconfig"; sourceTree = "<group>"; };
 		E1B807C4FF49F03353EBE468 /* Pods_RxWebSocket_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxWebSocket_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F20910181C52C3A300FBF76E /* .xctool-args */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ".xctool-args"; path = "../.xctool-args"; sourceTree = "<group>"; };
-		F27CA9C51C76209E009CFFF1 /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
-		F27DB92C1C7505FF004E8101 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		F27CA9C71C7623C4009CFFF1 /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .travis.yml; path = ../.travis.yml; sourceTree = "<group>"; };
+		F27CA9CB1C763A61009CFFF1 /* .xctool-args */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ".xctool-args"; path = "../.xctool-args"; sourceTree = "<group>"; };
+		F27CA9CD1C763CF5009CFFF1 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
 		F44BEA782B4CD6C861132119 /* Pods-RxWebSocket_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxWebSocket_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxWebSocket_Tests/Pods-RxWebSocket_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -140,10 +140,10 @@
 			children = (
 				367CA85EA0CD3761D345DBB9 /* RxWebSocket.podspec */,
 				2CEA7AF63F7A2790394B10EA /* README.md */,
-				F27DB92C1C7505FF004E8101 /* CHANGELOG.md */,
+				F27CA9CD1C763CF5009CFFF1 /* CHANGELOG.md */,
 				7496BB67D7F9D4279CDA9BFD /* LICENSE */,
-				F20910181C52C3A300FBF76E /* .xctool-args */,
-				F27CA9C51C76209E009CFFF1 /* .travis.yml */,
+				F27CA9CB1C763A61009CFFF1 /* .xctool-args */,
+				F27CA9C71C7623C4009CFFF1 /* .travis.yml */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
@@ -255,9 +255,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F27CA9C61C76209E009CFFF1 /* .travis.yml in Resources */,
+				F27CA9C81C7623C4009CFFF1 /* .travis.yml in Resources */,
+				F27CA9CC1C763A61009CFFF1 /* .xctool-args in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
-				F20910191C52C3A300FBF76E /* .xctool-args in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
@@ -371,8 +371,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
-				F27DB92D1C7505FF004E8101 /* CHANGELOG.md in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				F27CA9CE1C763CF5009CFFF1 /* CHANGELOG.md in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

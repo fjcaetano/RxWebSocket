@@ -11,7 +11,7 @@ class Tests: XCTestCase {
   override func setUp() {
     super.setUp()
     
-    socket = RxWebSocket(url: NSURL(string: "ws://localhost:9000")!)
+    socket = RxWebSocket(url: NSURL(string: "ws://127.0.0.1:9000")!)
   }
   
   override func tearDown() {
@@ -73,21 +73,23 @@ class Tests: XCTestCase {
       }
     }
     
-    waitForExpectationsWithTimeout(5, handler: nil)
+    waitForExpectationsWithTimeout(30, handler: nil)
   }
   
   // MARK: - Reactive components
   
   func testConnectCycle() {
-    let connectExp = expectationWithDescription("Completed connect cycle")
+    let connectExp = expectationWithDescription("Did connect")
+    let disconnectExp = expectationWithDescription("Did disconnect")
     
     _ = socket.stream.subscribeNext { [unowned self] event in
       switch event {
       case .Connect:
+        connectExp.fulfill()
         self.socket.disconnect()
         
       case .Disconnect(_):
-        connectExp.fulfill()
+        disconnectExp.fulfill()
         
       default:
         break
@@ -95,7 +97,7 @@ class Tests: XCTestCase {
     }
     
     
-    waitForExpectationsWithTimeout(5, handler: nil)
+    waitForExpectationsWithTimeout(30, handler: nil)
   }
   
   func testReceiveMessage() {
@@ -116,7 +118,7 @@ class Tests: XCTestCase {
       }
     }
     
-    waitForExpectationsWithTimeout(5, handler: nil)
+    waitForExpectationsWithTimeout(30, handler: nil)
   }
   
   func testReceiveData() {
@@ -137,7 +139,7 @@ class Tests: XCTestCase {
       }
     }
     
-    waitForExpectationsWithTimeout(5, handler: nil)
+    waitForExpectationsWithTimeout(30, handler: nil)
   }
   
   func testReceivePong() {
@@ -157,7 +159,7 @@ class Tests: XCTestCase {
       }
     }
     
-    waitForExpectationsWithTimeout(5, handler: nil)
+    waitForExpectationsWithTimeout(30, handler: nil)
   }
   
   // MARK: - Testing Properties
