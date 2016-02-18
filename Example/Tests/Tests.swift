@@ -11,7 +11,7 @@ class Tests: XCTestCase {
   override func setUp() {
     super.setUp()
     
-    socket = RxWebSocket(url: NSURL(string: "wss://echo.websocket.org")!)
+    socket = RxWebSocket(url: NSURL(string: "ws://localhost:9000")!)
   }
   
   override func tearDown() {

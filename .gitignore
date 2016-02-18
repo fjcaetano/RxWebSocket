@@ -22,6 +22,7 @@ xcuserdata
 *.moved-aside
 *.xcuserstate
 *.orig
+venv/
 
 ## Obj-C/Swift specific
 *.hmap
