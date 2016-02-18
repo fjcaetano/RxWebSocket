@@ -22,7 +22,31 @@ pod "RxWebSocket"
 
 ## Usage
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+Every websocket event will be sent to the `stream` which is an `Observable<StreamEvent>`.
+
+``` swift
+  public enum StreamEvent {
+    case Connect
+    case Disconnect(NSError?)
+    case Pong
+    case Text(String)
+    case Data(NSData)
+  }
+```
+
+You may filter each event you want with a simple `switch`. This is an example of subscribing only to `Connect` events:
+
+``` swift
+socket.stream
+  .filter {
+    switch $0 {
+    case .Connect: return true
+    default: return false
+    }
+  }
+```
+
+For further details, check the Example project.
 
 ## License
 
