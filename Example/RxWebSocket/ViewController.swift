@@ -30,25 +30,23 @@ class ViewController: UIViewController {
     
     // Connect/Disconnect events
     let connect = socket.stream
-      .filter {
-        switch $0 {
-        case .Connect: return true
-        default: return false
+      .flatMap { event -> Observable<Bool> in
+        switch event {
+        case .Connect: return Observable.just(true)
+        default: return Observable.empty()
         }
       }
-      .map { _ in true }
       .doOnNext { [weak self] _ in
         self?.appendMessage("CONNECTED")
     }
     
     let disconnect = socket.stream
-      .filter {
-        switch $0 {
-        case .Disconnect: return true
-        default: return false
+      .flatMap { event -> Observable<Bool> in
+        switch event {
+        case .Disconnect: return Observable.just(false)
+        default: return Observable.empty()
         }
       }
-      .map { _ in false }
       .doOnNext { [weak self] _ in
         self?.appendMessage("DISCONNECTED")
     }
@@ -65,13 +63,12 @@ class ViewController: UIViewController {
     
     // Text events
     socket.stream
-      .map { event -> String in
+      .flatMap { event -> Observable<String> in
         switch event {
-        case .Text(let text): return text
-        default: return ""
+        case .Text(let text): return (text.isEmpty ? Observable.empty() : Observable.just(text))
+        default: return Observable.empty()
         }
       }
-      .filter { !$0.isEmpty }
       .subscribeNext { [weak self] text in
         self?.appendMessage("RECEIVED: \(text)")
       }.addDisposableTo(disposeBag)

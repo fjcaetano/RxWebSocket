@@ -24,19 +24,24 @@ class Tests: XCTestCase {
   func testWrite() {
     let writeStringExp = expectationWithDescription("Did write string")
     let writeDataExp = expectationWithDescription("Did write data")
+    
     let writeStringFailExp = expectationWithDescription("Did fail to write string")
     let writeDataFailExp = expectationWithDescription("Did fail to write data")
+    let pingFailExp = expectationWithDescription("Did fail to ping")
     
     _ = socket.stream.subscribeNext { [unowned self] event in
       switch event {
       case .Connect:
+        self.socket.connect()
+        
         do {
+          // Write Stream
           try self.socket.write("foo")
-          XCTAssert(true)
           writeStringExp.fulfill()
           
+          
+          // Write Data
           try self.socket.write(NSData())
-          XCTAssert(true)
           writeDataExp.fulfill()
         }
         catch (let error as NSError) {
@@ -48,6 +53,7 @@ class Tests: XCTestCase {
       
         
       case .Disconnect:
+        // Write String
         do {
           try self.socket.write("foo")
           XCTFail()
@@ -58,6 +64,8 @@ class Tests: XCTestCase {
         
         writeStringFailExp.fulfill()
         
+        
+        // Write Data
         do {
           try self.socket.write(NSData())
           XCTFail()
@@ -67,6 +75,58 @@ class Tests: XCTestCase {
         }
         
         writeDataFailExp.fulfill()
+        
+        
+        // Ping
+        do {
+          try self.socket.ping()
+          XCTFail()
+        }
+        catch (let error as NSError) {
+          XCTAssertEqual(error.code, RxWebSocketError.ErrorCode.NotConnected.rawValue)
+        }
+        
+        pingFailExp.fulfill()
+        
+      default:
+        break
+      }
+    }
+    
+    waitForExpectationsWithTimeout(30, handler: nil)
+  }
+  
+  func testStream() {
+    let writeStreamExp = expectationWithDescription("Did write stream")
+    let writeStreamFailExp = expectationWithDescription("Did fail to write stream")
+    
+    socket.connect()
+    
+    _ = socket.stream.subscribeNext { [unowned self] event in
+      switch event {
+      case .Connect:
+        do {
+          try self.socket.stream(NSStream(), handleEvent: .OpenCompleted)
+          writeStreamExp.fulfill()
+        }
+        catch (let error as NSError) {
+          XCTFail(error.localizedDescription)
+        }
+        
+        // Disconnected socket
+        self.socket.disconnect()
+        
+        
+      case .Disconnect:
+        do {
+          try self.socket.stream(NSStream(), handleEvent: .OpenCompleted)
+          XCTFail()
+        }
+        catch (let error as NSError) {
+          XCTAssertEqual(error.code, RxWebSocketError.ErrorCode.NotConnected.rawValue)
+        }
+        
+        writeStreamFailExp.fulfill()
         
       default:
         break
