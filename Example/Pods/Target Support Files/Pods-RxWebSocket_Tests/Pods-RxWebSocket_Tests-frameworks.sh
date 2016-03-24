@@ -16,7 +16,7 @@ install_framework()
     local source="$1"
   fi
 
-  local destination="${CONFIGURATION_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
+  local destination="${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
 
   if [ -L "${source}" ]; then
       echo "Symlinked..."
@@ -82,16 +82,3 @@ strip_invalid_archs() {
   fi
 }
 
-
-if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-RxWebSocket_Tests/RxCocoa.framework"
-  install_framework "Pods-RxWebSocket_Tests/RxSwift.framework"
-  install_framework "Pods-RxWebSocket_Tests/RxWebSocket.framework"
-  install_framework "Pods-RxWebSocket_Tests/Starscream.framework"
-fi
-if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-RxWebSocket_Tests/RxCocoa.framework"
-  install_framework "Pods-RxWebSocket_Tests/RxSwift.framework"
-  install_framework "Pods-RxWebSocket_Tests/RxWebSocket.framework"
-  install_framework "Pods-RxWebSocket_Tests/Starscream.framework"
-fi

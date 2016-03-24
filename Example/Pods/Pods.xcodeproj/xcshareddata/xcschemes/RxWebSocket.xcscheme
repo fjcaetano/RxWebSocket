@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '62FDA4CB693197D5713E8F81'
+               BlueprintIdentifier = 'A4691B911BA7EBCC565831FC7B055D66'
                BlueprintName = 'RxWebSocket'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'RxWebSocket.framework'>
