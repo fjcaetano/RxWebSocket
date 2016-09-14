@@ -4,6 +4,9 @@ Starscream is a conforming WebSocket ([RFC 6455](http://tools.ietf.org/html/rfc6
 
 It's Objective-C counter part can be found here: [Jetfire](https://github.com/acmacalister/jetfire)
 
+###Swift 3/Xcode 8
+If you are looking for Swift 3 support, see [swift 3 here](https://github.com/daltoniam/Starscream/tree/swift3)
+
 ## Features
 
 - Conforms to all of the base [Autobahn test suite](http://autobahn.ws/testsuite/).
@@ -102,6 +105,8 @@ socket.onData = { (data: NSData) in
 //you could do onPong as well.
 socket.connect()
 ```
+
+One more: you can listen to socket connection and disconnection via notifications. Starscream posts `WebsocketDidConnectNotification` and `WebsocketDidDisconnectNotification`. You can find an `NSError` that caused the disconection by accessing `WebsocketDisconnectionErrorKeyName` on notification `userInfo`.
 
 
 ## The delegate methods give you a simple way to handle data from the server, but how do you send data?
@@ -211,11 +216,11 @@ Check out the SimpleTest project in the examples directory to see how to setup a
 
 ## Requirements
 
-Starscream works with iOS 7/OSX 10.9 or above. It is recommended to use iOS 8/10.10 or above for Cocoapods/framework support. To use Starscream with a project targeting iOS 7, you must include all Swift files directly in your project.
+Starscream works with iOS 7/OSX 10.9 or above. It is recommended to use iOS 8/10.10 or above for CocoaPods/framework support. To use Starscream with a project targeting iOS 7, you must include all Swift files directly in your project.
 
 ## Installation
 
-### Cocoapods
+### CocoaPods
 
 Check out [Get Started](http://cocoapods.org/) tab on [cocoapods.org](http://cocoapods.org/).
 
@@ -225,7 +230,7 @@ To use Starscream in your project add the following 'Podfile' to your project
 	platform :ios, '9.0'
 	use_frameworks!
 
-	pod 'Starscream', '~> 1.1.1'
+	pod 'Starscream', '~> 1.1.3'
 
 Then run:
 
@@ -247,7 +252,7 @@ $ brew install carthage
 To integrate Starscream into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```
-github "daltoniam/Starscream" >= 1.1.1
+github "daltoniam/Starscream" >= 1.1.3
 ```
 
 ### Rogue
