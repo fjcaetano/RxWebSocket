@@ -3,34 +3,32 @@ PODS:
     - RxSwift (~> 3.0.0-beta.2)
   - RxSwift (3.0.0-beta.2)
   - RxWebSocket (0.1.3):
-    - RxSwift (~> 3.0.0.beta.1)
-    - Starscream (~> 1.1)
-  - Starscream (1.1.3)
+    - RxCocoa (~> 3.0.0-beta.2)
+    - RxSwift (~> 3.0.0.beta.2)
+    - Starscream (~> 2.0)
+  - Starscream (2.0.0)
 
 DEPENDENCIES:
-  - RxCocoa (~> 3.0.0-beta.2)
-  - RxSwift (~> 3.0.0-beta.2)
   - RxWebSocket (from `../`)
-  - Starscream (from `https://github.com/daltoniam/Starscream.git`, branch `swift3`)
+  - Starscream (from `git@github.com:fjcaetano/Starscream.git`)
 
 EXTERNAL SOURCES:
   RxWebSocket:
     :path: "../"
   Starscream:
-    :branch: swift3
-    :git: https://github.com/daltoniam/Starscream.git
+    :git: git@github.com:fjcaetano/Starscream.git
 
 CHECKOUT OPTIONS:
   Starscream:
-    :commit: b1472f2a99a747ffda35c43ac4eb58b73c59722a
-    :git: https://github.com/daltoniam/Starscream.git
+    :commit: 8e1de1d475abeb0f88ac17ba2644febd2a681080
+    :git: git@github.com:fjcaetano/Starscream.git
 
 SPEC CHECKSUMS:
   RxCocoa: 1dd105d8a4e18034ccd7bd6d136445363ce67c8e
   RxSwift: 0ea939d7d97cb70657190ffde8dc2a9b455778fc
-  RxWebSocket: 92eb5d7ad5912d8741154bf21e03941ce0cc4892
-  Starscream: d662732354b40dd19ed1ece3e3c44c80b536b83c
+  RxWebSocket: e355a5c88269253da46bae07a8951072cd2e3ed3
+  Starscream: 947c865596f0d6bb3f0203fee23228ed2d471468
 
-PODFILE CHECKSUM: 82acc8a7d8b489576c9e353dafa7d36037e45da8
+PODFILE CHECKSUM: fc30315323b5decddadeaac486f747d02713f74f
 
 COCOAPODS: 1.0.1

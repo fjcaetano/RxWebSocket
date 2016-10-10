@@ -2,10 +2,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
 target 'RxWebSocket_Example' do
-    pod "RxWebSocket", :path => "../"
-    pod 'Starscream', :git => 'https://github.com/daltoniam/Starscream.git', :branch => 'swift3'
-    pod 'RxSwift', '~> 3.0.0-beta.2'
-    pod 'RxCocoa', '~> 3.0.0-beta.2'
+    pod 'RxWebSocket', :path => '../'
+    pod 'Starscream', :git => 'git@github.com:fjcaetano/Starscream.git'
     
     target 'RxWebSocket_Tests' do
         inherit! :search_paths

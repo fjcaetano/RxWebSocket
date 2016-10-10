@@ -39,6 +39,7 @@ Pod::Spec.new do |s|
 
 # Dependencies
 
-  s.dependency 'RxSwift', '~> 3.0.0.beta.1'
-  s.dependency 'Starscream', '~> 1.1'
+  s.dependency 'Starscream', '~> 2.0'
+  s.dependency 'RxSwift', '~> 3.0.0.beta.2'
+  s.dependency 'RxCocoa', '~> 3.0.0-beta.2'
 end

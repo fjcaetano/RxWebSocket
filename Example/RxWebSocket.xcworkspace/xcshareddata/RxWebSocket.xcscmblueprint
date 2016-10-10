@@ -5,11 +5,13 @@
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "A3E8A6FBE0B5E0CF7CB6872249B7897FC12AE807" : 9223372036854775807,
+    "C86D95FCAEB1FEA0694B5D4AC7241D7E5F42F31D" : 9223372036854775807,
     "8A2FC641E042D256BAE9D8D2ABD82F5EB3F835AE" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "721FADD4-B22A-4E8C-B5CF-B32E3F75F802",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "A3E8A6FBE0B5E0CF7CB6872249B7897FC12AE807" : "RxWebSocket\/",
+    "C86D95FCAEB1FEA0694B5D4AC7241D7E5F42F31D" : "Starscream\/",
     "8A2FC641E042D256BAE9D8D2ABD82F5EB3F835AE" : ""
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "RxWebSocket",
@@ -25,6 +27,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:fjcaetano\/RxWebSocket.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A3E8A6FBE0B5E0CF7CB6872249B7897FC12AE807"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:fjcaetano\/Starscream.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C86D95FCAEB1FEA0694B5D4AC7241D7E5F42F31D"
     }
   ]
 }

@@ -19,37 +19,27 @@ class ViewController: UIViewController {
     
     // MARK: Outlets
     
-    @IBOutlet private weak var textView: UITextView!
-    @IBOutlet private weak var textField: UITextField!
-    @IBOutlet private weak var sendButton: UIButton!
-    @IBOutlet private weak var connectButton: UIButton!
+    @IBOutlet fileprivate weak var textView: UITextView!
+    @IBOutlet fileprivate weak var textField: UITextField!
+    @IBOutlet fileprivate weak var sendButton: UIButton!
+    @IBOutlet fileprivate weak var connectButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         // Connect/Disconnect events
-        let connect = socket.stream
-            .flatMap { event -> Observable<Bool> in
-                switch event {
-                case .connect: return Observable.just(true)
-                default: return Observable.empty()
-                }
-            }
-            .do(onNext: { [weak self] _ in
+        let connect = socket.rx.connect
+            .do(onNext: { [weak self] in
                 self?.append("CONNECTED")
-        })
+                })
+            .map { true }
         
-        let disconnect = socket.stream
-            .flatMap { event -> Observable<Bool> in
-                switch event {
-                case .disconnect: return Observable.just(false)
-                default: return Observable.empty()
-                }
-            }
-            .do(onNext: { [weak self] _ in
+        let disconnect = socket.rx.disconnect
+            .do(onNext: { [weak self] in
                 self?.append("DISCONNECTED")
-        })
+                })
+            .map { false }
         
         
         Observable.of(connect, disconnect)
@@ -58,21 +48,15 @@ class ViewController: UIViewController {
                 self?.connectButton.isEnabled = true
                 self?.connectButton.isSelected = isConnected
                 self?.sendButton.isEnabled = isConnected
-            })
+                })
             .addDisposableTo(disposeBag)
         
         
         // Text events
-        socket.stream
-            .flatMap { event -> Observable<String> in
-                switch event {
-                case .text(let text): return (text.isEmpty ? Observable.empty() : Observable.just(text))
-                default: return Observable.empty()
-                }
-            }
+        socket.rx.text
             .subscribe(onNext: { [weak self] text in
                 self?.append("RECEIVED: \(text)")
-            })
+                })
             .addDisposableTo(disposeBag)
         
         
@@ -87,22 +71,17 @@ class ViewController: UIViewController {
                 else {
                     self.socket.connect()
                 }
-            })
+                })
             .addDisposableTo(disposeBag)
         
         
         // Send Button
         sendButton.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                do {
-                    let text = self.textField.text!
-                    try self.socket.write(text)
-                    self.append("SENT: \(text)")
-                }
-                catch let e {
-                    self.append("ERROR: \(e)")
-                }
+            .flatMap { self.textField.rx.text.take(1) }
+            .do(onNext: { text in
+                self.append("SENT: \(text)")
             })
+            .bindTo(socket.rx.text)
             .addDisposableTo(disposeBag)
     }
     
