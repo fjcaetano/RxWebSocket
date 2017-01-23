@@ -3,18 +3,8 @@ use_frameworks!
 
 target 'RxWebSocket_Example' do
     pod 'RxWebSocket', :path => '../'
-    pod 'Starscream', :git => 'git@github.com:fjcaetano/Starscream.git'
     
     target 'RxWebSocket_Tests' do
         inherit! :search_paths
-    end
-    
-    
-    post_install do |installer|
-        installer.pods_project.targets.each do |target|
-            target.build_configurations.each do |config|
-                config.build_settings['SWIFT_VERSION'] = '3.0'
-            end
-        end
     end
 end

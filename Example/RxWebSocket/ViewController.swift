@@ -77,7 +77,7 @@ class ViewController: UIViewController {
         
         // Send Button
         sendButton.rx.tap
-            .flatMap { self.textField.rx.text.take(1) }
+            .flatMap { self.textField.rx.text.orEmpty.take(1) }
             .do(onNext: { text in
                 self.append("SENT: \(text)")
             })
