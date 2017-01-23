@@ -1,3 +1,9 @@
+# 1.0.0
+
+- Updating to Swift 3
+- Updating to RxSwift 3.0
+- Updating to RxCocoa 3.0
+
 # 0.1.3
 
 Updating to RxCocoa 2.3
