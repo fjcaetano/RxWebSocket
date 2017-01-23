@@ -1,6 +1,0 @@
-framework module RxWebSocket {
-  umbrella header "RxWebSocket-umbrella.h"
-
-  export *
-  module * { export * }
-}

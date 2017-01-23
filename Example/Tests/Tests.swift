@@ -1,266 +1,214 @@
+@testable import RxWebSocket
+
 import UIKit
 import XCTest
-import RxWebSocket
 import Starscream
+import RxSwift
 
 
 class Tests: XCTestCase {
-  
-  var socket: RxWebSocket!
-  
-  override func setUp() {
-    super.setUp()
     
-    socket = RxWebSocket(url: NSURL(string: "ws://127.0.0.1:9000")!)
-  }
-  
-  override func tearDown() {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    super.tearDown()
+    private var socket: RxWebSocket!
+    private var disposeBag: DisposeBag!
     
-    socket.disconnect()
-  }
-  
-  func testWrite() {
-    let writeStringExp = expectationWithDescription("Did write string")
-    let writeDataExp = expectationWithDescription("Did write data")
-    
-    let writeStringFailExp = expectationWithDescription("Did fail to write string")
-    let writeDataFailExp = expectationWithDescription("Did fail to write data")
-    let pingFailExp = expectationWithDescription("Did fail to ping")
-    
-    _ = socket.stream.subscribeNext { [unowned self] event in
-      switch event {
-      case .Connect:
-        self.socket.connect()
+    override func setUp() {
+        super.setUp()
         
-        do {
-          // Write Stream
-          try self.socket.write("foo")
-          writeStringExp.fulfill()
-          
-          
-          // Write Data
-          try self.socket.write(NSData())
-          writeDataExp.fulfill()
-        }
-        catch (let error as NSError) {
-          XCTFail(error.localizedDescription)
-        }
-        
-        // Disconnected socket
-        self.socket.disconnect()
-      
-        
-      case .Disconnect:
-        // Write String
-        do {
-          try self.socket.write("foo")
-          XCTFail()
-        }
-        catch (let error as NSError) {
-          XCTAssertEqual(error.code, RxWebSocketError.ErrorCode.NotConnected.rawValue)
-        }
-        
-        writeStringFailExp.fulfill()
-        
-        
-        // Write Data
-        do {
-          try self.socket.write(NSData())
-          XCTFail()
-        }
-        catch (let error as NSError) {
-          XCTAssertEqual(error.code, RxWebSocketError.ErrorCode.NotConnected.rawValue)
-        }
-        
-        writeDataFailExp.fulfill()
-        
-        
-        // Ping
-        do {
-          try self.socket.ping()
-          XCTFail()
-        }
-        catch (let error as NSError) {
-          XCTAssertEqual(error.code, RxWebSocketError.ErrorCode.NotConnected.rawValue)
-        }
-        
-        pingFailExp.fulfill()
-        
-      default:
-        break
-      }
+        socket = RxWebSocket(url: URL(string: "ws://127.0.0.1:9000")!)
+        disposeBag = DisposeBag()
     }
     
-    waitForExpectationsWithTimeout(30, handler: nil)
-  }
-  
-  func testStream() {
-    let writeStreamExp = expectationWithDescription("Did write stream")
-    let writeStreamFailExp = expectationWithDescription("Did fail to write stream")
-    
-    socket.connect()
-    
-    _ = socket.stream.subscribeNext { [unowned self] event in
-      switch event {
-      case .Connect:
-        do {
-          try self.socket.stream(NSStream(), handleEvent: .OpenCompleted)
-          writeStreamExp.fulfill()
-        }
-        catch (let error as NSError) {
-          XCTFail(error.localizedDescription)
-        }
+    override func tearDown() {
+        socket.disconnect()
+        disposeBag = nil
         
-        // Disconnected socket
-        self.socket.disconnect()
-        
-        
-      case .Disconnect:
-        do {
-          try self.socket.stream(NSStream(), handleEvent: .OpenCompleted)
-          XCTFail()
-        }
-        catch (let error as NSError) {
-          XCTAssertEqual(error.code, RxWebSocketError.ErrorCode.NotConnected.rawValue)
-        }
-        
-        writeStreamFailExp.fulfill()
-        
-      default:
-        break
-      }
+        super.tearDown()
     }
     
-    waitForExpectationsWithTimeout(30, handler: nil)
-  }
-  
-  // MARK: - Reactive components
-  
-  func testConnectCycle() {
-    let connectExp = expectationWithDescription("Did connect")
-    let disconnectExp = expectationWithDescription("Did disconnect")
+    // MARK: - Reactive components
     
-    _ = socket.stream.subscribeNext { [unowned self] event in
-      switch event {
-      case .Connect:
-        connectExp.fulfill()
-        self.socket.disconnect()
+    func test__Connect_Cycle() {
+        let connectStreamExp = expectation(description: "Stream did connect")
+        let connectExp = expectation(description: "Did connect")
         
-      case .Disconnect(_):
-        disconnectExp.fulfill()
+        let disconnectStreamExp = expectation(description: "Stream did disconnect")
+        let disconnectExp = expectation(description: "Did disconnect")
         
-      default:
-        break
-      }
+        socket.rx.connect
+            .take(1)
+            .subscribe(onNext: {
+                connectExp.fulfill()
+            })
+            .addDisposableTo(disposeBag)
+        
+        socket.rx.disconnect
+            .take(1)
+            .subscribe(onNext: {
+                disconnectExp.fulfill()
+            })
+            .addDisposableTo(disposeBag)
+        
+        socket.rx.stream
+            .subscribe(onNext: { [unowned self] event in
+                switch event {
+                case .connect:
+                    connectStreamExp.fulfill()
+                    self.socket.disconnect()
+                    
+                case .disconnect(_):
+                    disconnectStreamExp.fulfill()
+                    
+                default:
+                    break
+                }
+                })
+            .addDisposableTo(disposeBag)
+        
+        
+        waitForExpectations(timeout: 30, handler: nil)
     }
     
-    
-    waitForExpectationsWithTimeout(30, handler: nil)
-  }
-  
-  func testReceiveMessage() {
-    let messageString = "messageString"
-    let exp = expectationWithDescription("Did receive text message")
-    
-    _ = socket.stream.subscribeNext { [unowned self] event in
-      switch event {
-      case .Connect:
-        _ = try? self.socket.write(messageString)
+    func test__Receive_Message() {
+        let messageString = "messageString"
         
-      case .Text(let string):
-        XCTAssertEqual(string, messageString)
-        exp.fulfill()
+        let streamExp = expectation(description: "Stream did receive text message")
+        let textExp = expectation(description: "Did receive text message")
         
-      default:
-        break
-      }
+        socket.rx.text
+            .take(1)
+            .subscribe(onNext: { result in
+                XCTAssertEqual(result, messageString)
+                textExp.fulfill()
+            })
+            .addDisposableTo(disposeBag)
+        
+        socket.rx.stream
+            .subscribe(onNext: { [unowned self] event in
+                switch event {
+                case .connect:
+                    self.socket.write(string: messageString)
+                    
+                case .text(let string):
+                    XCTAssertEqual(string, messageString)
+                    streamExp.fulfill()
+                    
+                default:
+                    break
+                }
+                })
+            .addDisposableTo(disposeBag)
+        
+        waitForExpectations(timeout: 30, handler: nil)
     }
     
-    waitForExpectationsWithTimeout(30, handler: nil)
-  }
-  
-  func testReceiveData() {
-    let messageData = "messageString".dataUsingEncoding(NSUTF8StringEncoding)!
-    let exp = expectationWithDescription("Did receive data message")
-    
-    _ = socket.stream.subscribeNext { [unowned self] event in
-      switch event {
-      case .Connect:
-        _ = try? self.socket.write(messageData)
+    func test__Receive_Data() {
+        let messageData = "messageString".data(using: String.Encoding.utf8)!
         
-      case .Data(let data):
-        XCTAssertEqual(data, messageData)
-        exp.fulfill()
+        let streamExp = expectation(description: "Stream did receive data message")
+        let dataExp = expectation(description: "Did receive data message")
         
-      default:
-        break
-      }
+        socket.rx.data
+            .take(1)
+            .subscribe(onNext: { data in
+                XCTAssertEqual(data, messageData)
+                dataExp.fulfill()
+            })
+            .addDisposableTo(disposeBag)
+        
+        socket.rx.stream
+            .subscribe(onNext: { [unowned self] event in
+                switch event {
+                case .connect:
+                    self.socket.write(data: messageData)
+                    
+                case .data(let data):
+                    XCTAssertEqual(data, messageData)
+                    streamExp.fulfill()
+                    
+                default:
+                    break
+                }
+                })
+            .addDisposableTo(disposeBag)
+        
+        waitForExpectations(timeout: 30, handler: nil)
     }
     
-    waitForExpectationsWithTimeout(30, handler: nil)
-  }
-  
-  func testReceivePong() {
-    let exp = expectationWithDescription("Did receive pong")
-    
-    _ = socket.stream.subscribeNext { [unowned self] event in
-      switch event {
-      case .Connect:
-        _ = try? self.socket.ping()
+    func test__Receive_Pong() {
+        var randomNumber = Int64(arc4random())
+        let pongData = Data(bytes: &randomNumber, count: MemoryLayout<Int64>.size)
         
-      case .Pong:
-        XCTAssert(true)
-        exp.fulfill()
+        let streamExp = expectation(description: "Stream did receive pong")
+        let pongExp = expectation(description: "Did receive pong")
         
-      default:
-        break
-      }
+        socket.rx.pong
+            .take(1)
+            .subscribe(onNext: { data in
+                XCTAssertEqual(data, pongData)
+                pongExp.fulfill()
+            })
+            .addDisposableTo(disposeBag)
+        
+        socket.rx.stream
+            .subscribe(onNext: { [unowned self] event in
+                switch event {
+                case .connect:
+                    self.socket.write(ping: pongData)
+                    
+                case .pong(let data):
+                    XCTAssertEqual(data, pongData)
+                    streamExp.fulfill()
+                    
+                default:
+                    break
+                }
+                })
+            .addDisposableTo(disposeBag)
+        
+        waitForExpectations(timeout: 30, handler: nil)
     }
     
-    waitForExpectationsWithTimeout(30, handler: nil)
-  }
-  
-  // MARK: - Testing Properties
-  
-  func testProperties_Header() {
-    XCTAssertEqual(socket.headers, [:])
+    // MARK: Binding
     
-    let header = ["foo": "bar"]
-    socket.headers = header
-    XCTAssertEqual(socket.headers, header)
-  }
-  
-  func testProperties_VoipEnabled() {
-    XCTAssertFalse(socket.voipEnabled)
+    func test__Send_Text() {
+        let message = "someMessage"
+        let exp = expectation(description: "Did receive sent message")
+        
+        socket.rx.text
+            .take(1)
+            .subscribe(onNext: { text in
+                XCTAssertEqual(text, message)
+                exp.fulfill()
+            })
+            .addDisposableTo(disposeBag)
+        
+        socket.rx.connect
+            .take(1)
+            .map { message }
+            .bindTo(socket.rx.text)
+            .addDisposableTo(disposeBag)
+        
+        waitForExpectations(timeout: 30, handler: nil)
+    }
     
-    let value = true
-    socket.voipEnabled = value
-    XCTAssertEqual(socket.voipEnabled, value)
-  }
-  
-  func testProperties_SSL() {
-    XCTAssertFalse(socket.selfSignedSSL)
-    
-    let value = true
-    socket.selfSignedSSL = value
-    XCTAssertEqual(socket.selfSignedSSL, value)
-  }
-  
-  func testProperties_Security() {
-    XCTAssertNil(socket.security)
-    
-    let security = SSLSecurity(usePublicKeys: true)
-    socket.security = security
-    XCTAssertTrue(socket.security != nil)
-  }
-  
-  func testProperties_SSLSuites() {
-    XCTAssertNil(socket.enabledSSLCipherSuites)
-    
-    let suites = [SSL_NULL_WITH_NULL_NULL]
-    socket.enabledSSLCipherSuites = suites
-    XCTAssertEqual(socket.enabledSSLCipherSuites!, suites)
-  }
+    func test__Send_Data() {
+        let message = "someMessage".data(using: String.Encoding.utf8)!
+        let exp = expectation(description: "Did receive sent data")
+        
+        socket.rx.data
+            .take(1)
+            .subscribe(onNext: { data in
+                XCTAssertEqual(data, message)
+                exp.fulfill()
+            })
+            .addDisposableTo(disposeBag)
+        
+        socket.rx.connect
+            .take(1)
+            .map { message }
+            .bindTo(socket.rx.data)
+            .addDisposableTo(disposeBag)
+        
+        waitForExpectations(timeout: 30, handler: nil)
+    }
 }

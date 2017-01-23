@@ -16,9 +16,12 @@ A lightweight abstraction layer over [Starscream](https://github.com/daltoniam/S
 RxWebSocket is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
-```ruby
+``` ruby
 pod "RxWebSocket"
+pod 'Starscream', :git => 'git@github.com:fjcaetano/Starscream.git'
 ```
+
+This branch requires that Starscream fork while [issue #256](https://github.com/daltoniam/Starscream/issues/265) is not fixed. 
 
 ## Usage
 

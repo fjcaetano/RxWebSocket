@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "RxWebSocket"
-  s.version          = "0.1.3"
+  s.version          = "1.0.0"
   s.summary          = "Reactive WebSockets"
 
 # This description is used to generate tags and improve search results.
@@ -39,6 +39,7 @@ Pod::Spec.new do |s|
 
 # Dependencies
 
-  s.dependency 'RxCocoa', '~> 2.3'
-  s.dependency 'Starscream', '~> 1.1.2'
+  s.dependency 'Starscream', '~> 2.0.2'
+  s.dependency 'RxSwift', '~> 3.0'
+  s.dependency 'RxCocoa', '~> 3.0'
 end

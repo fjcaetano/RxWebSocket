@@ -7,211 +7,142 @@
 //
 
 import Foundation
-import RxSwift
 import Starscream
-
-
-/** The errors your websocket may throw.
- */
-public class RxWebSocketError: NSError {
-  public static let Domain = "RxWebSocketError"
-  public enum ErrorCode: Int, CustomStringConvertible {
-    case NotConnected = 1
-    case NotAuthenticated = 2
-    
-    public var description: String {
-      get {
-        switch self {
-        case .NotConnected:
-          return "WebSocket not connected"
-          
-        case .NotAuthenticated:
-          return "Missing authentication"
-        }
-      }
-    }
-  }
-  
-  public init(code: ErrorCode) {
-    super.init(domain: RxWebSocketError.Domain, code: code.rawValue, userInfo: [NSLocalizedDescriptionKey: code.description])
-  }
-
-  required public init?(coder aDecoder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
-  }
-}
+import RxSwift
+import RxCocoa
 
 
 /**
  *  This is the abstraction over Starscream to make it reactive.
  */
-public struct RxWebSocket {
-  
-  /**
-   Every message received by the websocket is converted to an `StreamEvent`.
-   
-   - Connect:    The "connect" message, flagging that the websocket did connect to the server.
-   - Disconnect: A disconnect message that may contain an `NSError` containing the reason for the disconection.
-   - Pong:       The "pong" message the server may respond to a "ping".
-   - Text:       Any string messages received by the client.
-   - Data:       Any data messages received by the client, excluding strings.
-   */
-  public enum StreamEvent {
-    case Connect
-    case Disconnect(NSError?)
-    case Pong
-    case Text(String)
-    case Data(NSData)
-  }
-  
-  /// The websocket headers
-  public var headers: [String:String] {
-    get {
-      return socket.headers
-    }
-    set {
-      socket.headers = newValue
-    }
-  }
-  
-  /// Whether or not VOIP is enabled
-  public var voipEnabled: Bool {
-    get {
-      return socket.voipEnabled
-    }
-    set {
-      socket.voipEnabled = newValue
-    }
-  }
-  
-  /// If the SSL certificated used for secure connections was self signed.
-  public var selfSignedSSL: Bool {
-    get {
-      return socket.selfSignedSSL
-    }
-    set {
-      socket.selfSignedSSL = newValue
-    }
-  }
-  
-  /// The intended security to be used in the transport of messages.
-  public var security: SSLSecurity? {
-    get {
-      return socket.security
-    }
-    set {
-      socket.security = newValue
-    }
-  }
-  
-  /// The cipher suites that should be used with the messages encryption.
-  public var enabledSSLCipherSuites: [SSLCipherSuite]? {
-    get {
-      return socket.enabledSSLCipherSuites
-    }
-    set {
-      socket.enabledSSLCipherSuites = newValue
-    }
-  }
-  
-  private let publishStream: PublishSubject<StreamEvent>
-  /// The stream of messages received by the client.
-  public var stream: Observable<StreamEvent> {
-    return publishStream.asObservable()
-  }
-  
-  private let socket: WebSocket
-  
-  /**
-   The creation of a `RxWebSocket` object. The client is automatically connected to the server uppon initialization.
-   
-   - parameter url:       The server url.
-   - parameter protocols: The protocols that should be used in the comms. May be nil.
-   
-   - returns: An instance of `RxWebSocket`
-   */
-  public init(url: NSURL, protocols: [String]? = nil) {
-    let publish = PublishSubject<StreamEvent>()
-    publishStream = publish
+public class RxWebSocket: WebSocket {
     
-    
-    socket = WebSocket(url: url, protocols: protocols)
-    
-    socket.onConnect = { publish.onNext(.Connect) }
-    socket.onDisconnect = { publish.onNext(.Disconnect($0)) }
-    socket.onText = { publish.onNext(.Text($0)) }
-    socket.onData = { publish.onNext(.Data($0)) }
-    socket.onPong = { publish.onNext(.Pong) }
-    
-    socket.connect()
-  }
-  
-  /**
-   Writing a string message to the server.
-   
-   - parameter text: The message to be sent.
-   
-   - throws: If a message is sent but the websocket is not connected, a RxWebSocketError.NotConnected error is thrown.
-   */
-  public func write(text: String) throws {
-    if !socket.isConnected {  
-      throw RxWebSocketError(code: .NotConnected)
+    /**
+     Every message received by the websocket is converted to an `StreamEvent`.
+     
+     - Connect:    The "connect" message, flagging that the websocket did connect to the server.
+     - Disconnect: A disconnect message that may contain an `NSError` containing the reason for the disconection.
+     - Pong:       The "pong" message the server may respond to a "ping".
+     - Text:       Any string messages received by the client.
+     - Data:       Any data messages received by the client, excluding strings.
+     */
+    public enum StreamEvent {
+        case connect
+        case disconnect(NSError?)
+        case pong(Data?)
+        case text(String)
+        case data(Data)
     }
     
-    socket.writeString(text)
-  }
-  
-  /**
-   Writing a any data message to the server.
-   
-   - parameter text: The message to be sent.
-   
-   - throws: If a message is sent but the websocket is not connected, a RxWebSocketError.NotConnected error is thrown.
-   */
-  public func write(data: NSData) throws {
-    if !socket.isConnected {
-      throw RxWebSocketError(code: .NotConnected)
+    // MARK: Private Properties
+    
+    fileprivate let publishStream: PublishSubject<StreamEvent>
+    
+    /**
+     The creation of a `RxWebSocket` object. The client is automatically connected to the server uppon initialization.
+     
+     - parameter url:       The server url.
+     - parameter protocols: The protocols that should be used in the comms. May be nil.
+     
+     - returns: An instance of `RxWebSocket`
+     */
+    override public init(url: URL, protocols: [String]? = nil) {
+        let publish = PublishSubject<StreamEvent>()
+        publishStream = publish
+        
+        super.init(url: url, protocols: protocols)
+        
+        super.onConnect = { publish.onNext(.connect) }
+        super.onDisconnect = { publish.onNext(.disconnect($0)) }
+        super.onText = { publish.onNext(.text($0)) }
+        super.onData = { publish.onNext(.data($0)) }
+        super.onPong = { publish.onNext(.pong($0)) }
+        
+        connect()
+    }
+}
+
+
+public extension Reactive where Base: RxWebSocket {
+    /** Receives and sends text messages from the websocket.
+     */
+    var text: ControlProperty<String> {
+        let values = stream.flatMap { event -> Observable<String> in
+            guard case .text(let text) = event else {
+                return Observable.empty()
+            }
+            
+            return Observable.just(text)
+        }
+        
+        return ControlProperty(values: values, valueSink: AnyObserver { event in
+            guard case .next(let text) = event else {
+                return
+            }
+            
+            self.base.write(string: text)
+        })
     }
     
-    socket.writeData(data)
-  }
-  
-  
-  public func stream(stream: NSStream, handleEvent eventCode: NSStreamEvent) throws {
-    if !socket.isConnected {
-      throw RxWebSocketError(code: .NotConnected)
+    /** Receives and sends data messages from the websocket.
+     */
+    var data: ControlProperty<Data> {
+        let values = stream.flatMap { event -> Observable<Data> in
+            guard case .data(let data) = event else {
+                return Observable.empty()
+            }
+            
+            return Observable.just(data)
+        }
+        
+        return ControlProperty(values: values, valueSink: AnyObserver { event in
+            guard case .next(let data) = event else {
+                return
+            }
+            
+            self.base.write(data: data)
+        })
     }
     
-    socket.stream(stream, handleEvent: eventCode)
-  }
-  
-  /**
-   Disconnects from the server.
-   */
-  public func disconnect() {
-    socket.disconnect()
-  }
-  
-  /**
-   Connects to the server.
-   */
-  public func connect() {
-    guard !socket.isConnected else { return }
-    socket.connect()
-  }
-  
-  /**
-   Sends a "ping" message to the server.
-   
-   - parameter data: Any data that may be attached to the ping message.
-   
-   - throws: If a ping is sent but the websocket is not connected, a RxWebSocketError.NotConnected error is thrown.
-   */
-  public func ping(data: NSData = NSData()) throws {
-    if !socket.isConnected {
-      throw RxWebSocketError(code: .NotConnected)
+    /** Receives connection events from the websocket.
+     */
+    var connect: Observable<Void> {
+        return stream.flatMap { event -> Observable<Void> in
+            guard case .connect = event else {
+                return Observable.empty()
+            }
+            
+            return Observable.just(())
+        }
     }
     
-    socket.writePing(data)
-  }
+    /** Receives disconnect events from the websocket.
+     */
+    var disconnect: Observable<Void> {
+        return stream.flatMap { event -> Observable<Void> in
+            guard case .disconnect = event else {
+                return Observable.empty()
+            }
+            
+            return Observable.just(())
+        }
+    }
+    
+    /** Receives "pong" messages from the websocket
+     */
+    var pong: Observable<Data?> {
+        return stream.flatMap { event -> Observable<Data?> in
+            guard case .pong(let data) = event else {
+                return Observable.empty()
+            }
+            
+            return Observable.just(data)
+        }
+    }
+    
+    /** The stream of messages received by the websocket.
+     */
+    public var stream: Observable<RxWebSocket.StreamEvent> {
+        return base.publishStream.asObservable()
+    }
 }

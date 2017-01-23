@@ -37,9 +37,4 @@ venv/
 .DS_Store
 
 ## CocoaPods
-#Pods/
-
-html/highwinds_credentials.json
-html/node_modules/
-html/fb-*.html
-html/ios-*.html
+Pods/

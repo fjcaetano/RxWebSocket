@@ -1,6 +1,0 @@
-framework module Pods_RxWebSocket_Tests {
-  umbrella header "Pods-RxWebSocket_Tests-umbrella.h"
-
-  export *
-  module * { export * }
-}
