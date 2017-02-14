@@ -18,10 +18,7 @@ it, simply add the following line to your Podfile:
 
 ``` ruby
 pod "RxWebSocket"
-pod 'Starscream', :git => 'git@github.com:fjcaetano/Starscream.git'
-```
-
-This branch requires that Starscream fork while [issue #256](https://github.com/daltoniam/Starscream/issues/265) is not fixed. 
+``` 
 
 ## Usage
 
@@ -29,24 +26,25 @@ Every websocket event will be sent to the `stream` which is an `Observable<Strea
 
 ``` swift
   public enum StreamEvent {
-    case Connect
-    case Disconnect(NSError?)
-    case Pong
-    case Text(String)
-    case Data(NSData)
+    case connect
+    case disconnect(Error?)
+    case pong
+    case text(String)
+    case data(Data)
   }
 ```
 
-You may filter each event you want with a simple `switch`. This is an example of subscribing only to `Connect` events:
+You may receive and send text events by subscribing to the `text` property:
 
 ``` swift
-socket.stream
-  .filter {
-    switch $0 {
-    case .Connect: return true
-    default: return false
-    }
-  }
+let label = UILabel()
+socket.rx.text
+    .bindTo(label.rx.text)
+
+
+sendButton.rx.tap
+    .flatMap { textField.text ?? "" }
+    .bindTo(socket.rx.text)
 ```
 
 For further details, check the Example project.
