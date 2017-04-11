@@ -20,17 +20,26 @@ public class RxWebSocket: WebSocket {
     /**
      Every message received by the websocket is converted to an `StreamEvent`.
      
-     - Connect:    The "connect" message, flagging that the websocket did connect to the server.
-     - Disconnect: A disconnect message that may contain an `NSError` containing the reason for the disconection.
-     - Pong:       The "pong" message the server may respond to a "ping".
-     - Text:       Any string messages received by the client.
-     - Data:       Any data messages received by the client, excluding strings.
+     - connect:    The "connect" message, flagging that the websocket did connect to the server.
+     - disconnect: A disconnect message that may contain an `Error` containing the reason for the disconection.
+     - pong:       The "pong" message the server may respond to a "ping".
+     - text:       Any string messages received by the client.
+     - data:       Any data messages received by the client, excluding strings.
      */
     public enum StreamEvent {
+        /// The "connect" message, flagging that the websocket did connect to the server.
         case connect
-        case disconnect(NSError?)
+        
+        /// A disconnect message that may contain an `Error` containing the reason for the disconection.
+        case disconnect(Error?)
+        
+        /// The "pong" message the server may respond to a "ping".
         case pong(Data?)
+        
+        /// Any string messages received by the client.
         case text(String)
+        
+        /// Any data messages received by the client, excluding strings.
         case data(Data)
     }
     
@@ -63,9 +72,9 @@ public class RxWebSocket: WebSocket {
 }
 
 
+/// Makes RxWebSocket Reactive.
 public extension Reactive where Base: RxWebSocket {
-    /** Receives and sends text messages from the websocket.
-     */
+    /// Receives and sends text messages from the websocket.
     var text: ControlProperty<String> {
         let values = stream.flatMap { event -> Observable<String> in
             guard case .text(let text) = event else {
@@ -84,8 +93,7 @@ public extension Reactive where Base: RxWebSocket {
         })
     }
     
-    /** Receives and sends data messages from the websocket.
-     */
+    /// Receives and sends data messages from the websocket.
     var data: ControlProperty<Data> {
         let values = stream.flatMap { event -> Observable<Data> in
             guard case .data(let data) = event else {
@@ -104,8 +112,7 @@ public extension Reactive where Base: RxWebSocket {
         })
     }
     
-    /** Receives connection events from the websocket.
-     */
+    /// Receives connection events from the websocket.
     var connect: Observable<Void> {
         return stream.flatMap { event -> Observable<Void> in
             guard case .connect = event else {
@@ -116,8 +123,7 @@ public extension Reactive where Base: RxWebSocket {
         }
     }
     
-    /** Receives disconnect events from the websocket.
-     */
+    /// Receives disconnect events from the websocket.
     var disconnect: Observable<Void> {
         return stream.flatMap { event -> Observable<Void> in
             guard case .disconnect = event else {
@@ -128,8 +134,7 @@ public extension Reactive where Base: RxWebSocket {
         }
     }
     
-    /** Receives "pong" messages from the websocket
-     */
+    /// Receives "pong" messages from the websocket
     var pong: Observable<Data?> {
         return stream.flatMap { event -> Observable<Data?> in
             guard case .pong(let data) = event else {
@@ -140,8 +145,7 @@ public extension Reactive where Base: RxWebSocket {
         }
     }
     
-    /** The stream of messages received by the websocket.
-     */
+    /// The stream of messages received by the websocket.
     public var stream: Observable<RxWebSocket.StreamEvent> {
         return base.publishStream.asObservable()
     }

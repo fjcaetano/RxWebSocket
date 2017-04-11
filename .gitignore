@@ -35,6 +35,7 @@ venv/
 ## Directory-based project format:
 .idea/
 .DS_Store
+docs/
 
 ## CocoaPods
 Pods/
