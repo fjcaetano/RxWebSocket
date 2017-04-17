@@ -4,6 +4,7 @@
 [![Version](https://img.shields.io/cocoapods/v/RxWebSocket.svg?style=flat)](http://cocoapods.org/pods/RxWebSocket)
 [![License](https://img.shields.io/cocoapods/l/RxWebSocket.svg?style=flat)](http://cocoapods.org/pods/RxWebSocket)
 [![Platform](https://img.shields.io/cocoapods/p/RxWebSocket.svg?style=flat)](http://cocoapods.org/pods/RxWebSocket)
+[![codecov](https://codecov.io/gh/fjcaetano/RxWebSocket/branch/master/graph/badge.svg)](https://codecov.io/gh/fjcaetano/RxWebSocket)
 
 ------
 

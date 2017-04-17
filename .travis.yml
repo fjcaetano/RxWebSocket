@@ -4,23 +4,24 @@ language: objective-c
 podfile: Example/Podfile
 
 before_install:
+  - echo $(which wstest)
+  - echo $(which pip)
+#  - echo $(which xcpretty)
   - gem install cocoapods -v '1.2.1'
   - pod --version
   - pod repo update
 
 install:
   - if [[ ! $(which pip) ]]; then easy_install --user pip && export PATH=/Users/travis/Library/Python/2.7/bin:${PATH}; fi;
-  - pip install --user --upgrade unittest2
-  - pip install --user --upgrade autobahntestsuite
-  - pushd Example
-  - pod install
-  - popd
-  - if [[ ! $(which xcpretty) ]]; then gem install xcpretty --user-install; fi;
+  - pip install -r requirements.txt
+  - echo $(which wstest)
+  - pushd Example; pod install; popd
+#  - if [[ ! $(which xcpretty) ]]; then gem install xcpretty --user-install; fi;
 
 script:
-  - xcodebuild -workspace Example/RxWebSocket.xcworkspace -scheme RxWebSocket-Example -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.2' build | xcpretty
+  - xcodebuild -workspace Example/RxWebSocket.xcworkspace -scheme RxWebSocket-Example -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.2' build
   - wstest -m echoserver -w ws://127.0.0.1:9000 &
-  - xcodebuild -workspace Example/RxWebSocket.xcworkspace -scheme RxWebSocket-Example -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.2' test | xcpretty
+  - xcodebuild -workspace Example/RxWebSocket.xcworkspace -scheme RxWebSocket-Example -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.2' test
   - pod lib lint --no-clean --quick
 
 after_success:
