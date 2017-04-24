@@ -124,13 +124,13 @@ public extension Reactive where Base: RxWebSocket {
     }
     
     /// Receives disconnect events from the websocket.
-    var disconnect: Observable<Void> {
-        return stream.flatMap { event -> Observable<Void> in
-            guard case .disconnect = event else {
+    var disconnect: Observable<Error?> {
+        return stream.flatMap { event -> Observable<Error?> in
+            guard case .disconnect(let error) = event else {
                 return Observable.empty()
             }
             
-            return Observable.just(())
+            return Observable.just(error)
         }
     }
     

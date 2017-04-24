@@ -43,7 +43,9 @@ class Tests: XCTestCase {
         
         socket.rx.disconnect
             .take(1)
-            .subscribe(onNext: {
+            .subscribe(onNext: { error in
+                XCTAssertNotNil(error)
+                XCTAssertEqual((error! as NSError).code, Int(WebSocket.CloseCode.normal.rawValue))
                 disconnectExp.fulfill()
             })
             .addDisposableTo(disposeBag)
