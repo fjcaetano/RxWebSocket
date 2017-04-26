@@ -47,7 +47,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "echo &quot;Activating vEnv&quot;&#10;source ${PROJECT_DIR}/../venv/bin/activate&#10;&#10;echo &quot;Running echoserver&quot;&#10;wstest -m echoserver -w ws://localhost:9000 &amp;">
+               scriptText = "exec &gt;&gt; /tmp/${PROJECT_NAME}_archive.log 2&gt;&amp;1&#10;&#10;echo &quot;Activating vEnv&quot;&#10;source ${PROJECT_DIR}/../venv/bin/activate&#10;&#10;echo &quot;Running echoserver&quot;&#10;wstest -m echoserver -w ws://localhost:9000 &amp;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
@@ -65,7 +65,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "WS_PID=$(lsof -ti :9000)&#10;echo &quot;Killing echoserver [$WS_PID]&quot;&#10;kill -9 $WS_PID">
+               scriptText = "exec &gt;&gt; /tmp/${PROJECT_NAME}_archive.log 2&gt;&amp;1&#10;&#10;WS_PID=$(lsof -ti :9000)&#10;echo &quot;Killing echoserver [$WS_PID]&quot;&#10;kill -9 $WS_PID">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"

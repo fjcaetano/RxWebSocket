@@ -1,3 +1,8 @@
+# 1.0.1
+
+- Forwarding error to `rx.disconnect`
+
+
 # 1.0.0
 
 - Updating to Swift 3

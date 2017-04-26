@@ -16,7 +16,6 @@
 		96E3630555BF5C6B9B407DD5 /* Pods_RxWebSocket_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 709422A2636017DD399E9D3C /* Pods_RxWebSocket_Tests.framework */; };
 		EF0B1B74B44118C54DF67229 /* Pods_RxWebSocket_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FDAB2D21F5BE19B1DABEB86 /* Pods_RxWebSocket_Example.framework */; };
 		F27CA9C81C7623C4009CFFF1 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = F27CA9C71C7623C4009CFFF1 /* .travis.yml */; };
-		F27CA9CC1C763A61009CFFF1 /* .xctool-args in Resources */ = {isa = PBXBuildFile; fileRef = F27CA9CB1C763A61009CFFF1 /* .xctool-args */; };
 		F27CA9CE1C763CF5009CFFF1 /* CHANGELOG.md in Sources */ = {isa = PBXBuildFile; fileRef = F27CA9CD1C763CF5009CFFF1 /* CHANGELOG.md */; };
 		F2ECCF9C1EA01F330097B199 /* codecov.yml in Resources */ = {isa = PBXBuildFile; fileRef = F2ECCF9B1EA01F330097B199 /* codecov.yml */; };
 /* End PBXBuildFile section */
@@ -52,7 +51,6 @@
 		B256775BC6FE4B02B040F943 /* Pods-RxWebSocket_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxWebSocket_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxWebSocket_Tests/Pods-RxWebSocket_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		BD6500E316122FDC2DA47095 /* Pods-RxWebSocket_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxWebSocket_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RxWebSocket_Example/Pods-RxWebSocket_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		F27CA9C71C7623C4009CFFF1 /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .travis.yml; path = ../.travis.yml; sourceTree = "<group>"; };
-		F27CA9CB1C763A61009CFFF1 /* .xctool-args */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ".xctool-args"; path = "../.xctool-args"; sourceTree = "<group>"; };
 		F27CA9CD1C763CF5009CFFF1 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
 		F2ECCF9B1EA01F330097B199 /* codecov.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = codecov.yml; path = ../codecov.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,7 +142,6 @@
 				2CEA7AF63F7A2790394B10EA /* README.md */,
 				F27CA9CD1C763CF5009CFFF1 /* CHANGELOG.md */,
 				7496BB67D7F9D4279CDA9BFD /* LICENSE */,
-				F27CA9CB1C763A61009CFFF1 /* .xctool-args */,
 				F27CA9C71C7623C4009CFFF1 /* .travis.yml */,
 				F2ECCF9B1EA01F330097B199 /* codecov.yml */,
 			);
@@ -261,7 +258,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F27CA9C81C7623C4009CFFF1 /* .travis.yml in Resources */,
-				F27CA9CC1C763A61009CFFF1 /* .xctool-args in Resources */,
 				F2ECCF9C1EA01F330097B199 /* codecov.yml in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
