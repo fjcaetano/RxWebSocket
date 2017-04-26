@@ -36,10 +36,10 @@ class ViewController: UIViewController {
             .map { true }
         
         let disconnect = socket.rx.disconnect
-            .do(onNext: { [weak self] in
+            .do(onNext: { [weak self] _ in
                 self?.append("DISCONNECTED")
                 })
-            .map { false }
+            .map { _ in false }
         
         
         Observable.of(connect, disconnect)
