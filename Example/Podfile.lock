@@ -1,26 +1,29 @@
 PODS:
-  - RxCocoa (3.1.0):
-    - RxSwift (~> 3.1)
-  - RxSwift (3.1.0)
-  - RxWebSocket (1.0.0):
-    - RxCocoa (~> 3.0)
-    - RxSwift (~> 3.0)
-    - Starscream (~> 2.0.2)
-  - Starscream (2.0.2)
+  - RxCocoa (4.0.0):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.0.0)
+  - RxWebSocket (1.0.1):
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
+    - Starscream (~> 3.0)
+  - Starscream (3.0.2)
+  - SwiftLint (0.23.1)
 
 DEPENDENCIES:
   - RxWebSocket (from `../`)
+  - SwiftLint (~> 0.23.1)
 
 EXTERNAL SOURCES:
   RxWebSocket:
-    :path: "../"
+    :path: ../
 
 SPEC CHECKSUMS:
-  RxCocoa: 50d7564866da9299161e86a263ce12a0873904d8
-  RxSwift: 83ff553e7593fdfdcb2562933a64c0284dffdadc
-  RxWebSocket: c7f38f320f43e8efaf4b905a760e0c180d40c277
-  Starscream: 6c135a34e0a6e60cedaa0b30db67a4c05cf7cd38
+  RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
+  RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
+  RxWebSocket: a5637bdeda2ae7d3bc49d4693133009c815597b8
+  Starscream: b512c62f6706421221b5ceb2ba01a9f58aca5bea
+  SwiftLint: 1b670ce79284c76520f84060e87d645078fd32fa
 
-PODFILE CHECKSUM: 16599732a12f0034f0407a2c26a862c21085bf73
+PODFILE CHECKSUM: 456db7708e72ed614ed2493176db7ce5f5302def
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.3.1

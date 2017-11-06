@@ -21,15 +21,32 @@ platform :ios do
   lane :ci do
     test
     pod_lint
-    carthage_lint
+    # carthage_lint
+  end
+
+  desc "Starts websocket echoserver for testing"
+  lane :start_server do
+    sh "../server.sh start"
+  end
+
+  desc "Stops websocket echoserver for testing"
+  lane :stop_server do
+    sh "../server.sh stop"
   end
 
   desc "Runs all the tests"
   lane :test do
-    cocoapods
+    begin
+      start_server
+    rescue => e
+    end
+
+    cocoapods(
+      podfile: "Example/Podfile",
+    )
 
     swiftlint(
-      executable: "Pods/Swiftlint/swiftlint",
+      executable: "Example/Pods/Swiftlint/swiftlint",
       strict: true,
     )
 
@@ -43,7 +60,7 @@ platform :ios do
       build_for_testing: true,
       devices: devices,
       scheme: "RxWebSocket-Example",
-      workspace: "RxWebSocket.xcworkspace",
+      workspace: "Example/RxWebSocket.xcworkspace",
       code_coverage: true,
     )
 
@@ -51,7 +68,7 @@ platform :ios do
       test_without_building: true,
       devices: devices,
       scheme: "RxWebSocket-Example",
-      workspace: "RxWebSocket.xcworkspace",
+      workspace: "Example/RxWebSocket.xcworkspace",
       code_coverage: true,
     )
 
@@ -114,6 +131,11 @@ platform :ios do
       upload_assets: ["RxWebSocket.framework.zip"],
       description: changelog,
     )
+
+    begin
+      stop_server
+    rescue => e
+    end
   end
 
   after_all do |lane|
