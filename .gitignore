@@ -23,6 +23,8 @@ xcuserdata
 *.xcuserstate
 *.orig
 venv/
+.bundle
+vendor
 
 ## Obj-C/Swift specific
 *.hmap
@@ -39,3 +41,11 @@ docs/
 
 ## CocoaPods
 Pods/
+Carthage/
+
+## Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/README.md
+fastlane/test_output

@@ -1,0 +1,133 @@
+# If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+# This is the minimum version number required.
+# Update this, if you use features of a newer version
+fastlane_version "2.62.1"
+
+default_platform :ios
+
+platform :ios do
+  skip_docs
+
+  devices = [
+    "iPhone X (11.0)",
+    "iPhone 7 (10.0)",
+    "iPhone 6 (9.0)",
+    "iPhone 5s (8.1)"
+  ]
+
+  desc "Runs the following lanes:\n- test\n- pod_lint\n- carthage_lint"
+  lane :ci do
+    test
+    pod_lint
+    carthage_lint
+  end
+
+  desc "Runs all the tests"
+  lane :test do
+    cocoapods
+
+    swiftlint(
+      executable: "Pods/Swiftlint/swiftlint",
+      strict: true,
+    )
+
+    # The problem lies in the fact (or rather: serious bug in xcodebuild) that
+    # the timeout for connecting to the XCTest server starts at the moment you
+    # issue the command xcodebuild. The timeout is 120 seconds, so if your
+    # compilation + startup of the simulator takes longer than 2 minutes
+    # xcodebuild will give this "Canceling tests due to timeout" error.
+    # https://stackoverflow.com/questions/37922146/xctests-failing-on-physical-device-canceling-tests-due-to-timeout/40790171#40790171
+    scan(
+      build_for_testing: true,
+      devices: devices,
+      scheme: "RxWebSocket-Example",
+      workspace: "RxWebSocket.xcworkspace",
+      code_coverage: true,
+    )
+
+    scan(
+      test_without_building: true,
+      devices: devices,
+      scheme: "RxWebSocket-Example",
+      workspace: "RxWebSocket.xcworkspace",
+      code_coverage: true,
+    )
+
+    if is_ci
+      puts "Uploading coverage files to CodeCov"
+      codecov(
+        project_name: 'RxWebSocket',
+        use_xcodeplist: true,
+      )
+    else
+      puts "Not CI: Skipping coverage files upload"
+    end
+  end
+
+  desc "Lint Cocoapods Lib"
+  lane :pod_lint do
+    pod_lib_lint(
+      allow_warnings: true, # Remove this when Starscream stops warning
+    )
+  end
+
+  desc "Lint Carthage lib"
+  lane :carthage_lint do
+    carthage(
+      command: "update",
+      cache_builds: true,
+    )
+
+    carthage(
+      command: "build",
+      cache_builds: true,
+      no_skip_current: true,
+    )
+  end
+
+  desc "Deploy a new version to Github and Cocoapods"
+  lane :release do
+    ci unless is_ci
+
+    carthage(
+      command: "archive",
+      frameworks: ["RxWebSocket"],
+    )
+
+    pod_push(
+      path: "RxWebSocket.podspec",
+      verbose: true,
+    )
+
+    prev_tag = sh "git describe --abbrev=0 --tags `git rev-list --tags --skip=1  --max-count=1`"
+    changelog = changelog_from_git_commits(
+      between: [last_git_tag, prev_tag.strip],
+      pretty: "- %s"
+    )
+
+    set_github_release(
+      repository_name: "fjcaetano/RxWebSocket",
+      tag_name: last_git_tag,
+      name: last_git_tag,
+      upload_assets: ["RxWebSocket.framework.zip"],
+      description: changelog,
+    )
+  end
+
+  after_all do |lane|
+    # This block is called, only if the executed lane was successful
+
+    # slack(
+    #   message: "Successfully deployed new App Update."
+    # )
+  end
+
+  error do |lane, exception|
+    # slack(
+    #   message: exception.message,
+    #   success: false
+    # )
+  end
+end

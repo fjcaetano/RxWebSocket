@@ -1,3 +1,2 @@
 github "daltoniam/Starscream" ~> 3.0
 github "ReactiveX/RxSwift" ~> 4.0
-github "ReactiveX/RxCocoa" ~> 4.0
