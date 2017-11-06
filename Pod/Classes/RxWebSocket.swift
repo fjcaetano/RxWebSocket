@@ -55,11 +55,11 @@ public class RxWebSocket: WebSocket {
      
      - returns: An instance of `RxWebSocket`
      */
-    override public init(url: URL, protocols: [String]? = nil) {
+    override public init(request: URLRequest, protocols: [String]? = nil, stream: WSStream = FoundationStream()) {
         let publish = PublishSubject<StreamEvent>()
         publishStream = publish
-        
-        super.init(url: url, protocols: protocols)
+
+        super.init(request: request, protocols: protocols, stream: stream)
         
         super.onConnect = { publish.onNext(.connect) }
         super.onDisconnect = { publish.onNext(.disconnect($0)) }

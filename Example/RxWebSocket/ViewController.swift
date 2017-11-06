@@ -49,7 +49,7 @@ class ViewController: UIViewController {
                 self?.connectButton.isSelected = isConnected
                 self?.sendButton.isEnabled = isConnected
                 })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         
         // Text events
@@ -57,7 +57,7 @@ class ViewController: UIViewController {
             .subscribe(onNext: { [weak self] text in
                 self?.append("RECEIVED: \(text)")
                 })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         
         // Connect Button
@@ -72,7 +72,7 @@ class ViewController: UIViewController {
                     self.socket.connect()
                 }
                 })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         
         // Send Button
@@ -81,8 +81,8 @@ class ViewController: UIViewController {
             .do(onNext: { text in
                 self.append("SENT: \(text)")
             })
-            .bindTo(socket.rx.text)
-            .addDisposableTo(disposeBag)
+            .bind(to: socket.rx.text)
+            .disposed(by: disposeBag)
     }
     
     // MARK: - Private Methods
@@ -91,7 +91,7 @@ class ViewController: UIViewController {
         let currentText = textView.text ?? ""
         textView.text = "\(currentText)\n\n\(message)"
         
-        textView.scrollRangeToVisible(NSMakeRange(textView.text.characters.count, 0))
+        textView.scrollRangeToVisible(NSMakeRange(textView.text.count, 0))
         // lolwut? i know
         textView.isScrollEnabled = false
         textView.isScrollEnabled = true

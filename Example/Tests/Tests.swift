@@ -39,16 +39,16 @@ class Tests: XCTestCase {
             .subscribe(onNext: {
                 connectExp.fulfill()
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         socket.rx.disconnect
             .take(1)
             .subscribe(onNext: { error in
                 XCTAssertNotNil(error)
-                XCTAssertEqual((error! as NSError).code, Int(WebSocket.CloseCode.normal.rawValue))
+                XCTAssertEqual((error! as NSError).code, Int(CloseCode.normal.rawValue))
                 disconnectExp.fulfill()
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         socket.rx.stream
             .subscribe(onNext: { [unowned self] event in
@@ -64,7 +64,7 @@ class Tests: XCTestCase {
                     break
                 }
                 })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         
         waitForExpectations(timeout: 30, handler: nil)
@@ -82,7 +82,7 @@ class Tests: XCTestCase {
                 XCTAssertEqual(result, messageString)
                 textExp.fulfill()
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         socket.rx.stream
             .subscribe(onNext: { [unowned self] event in
@@ -98,7 +98,7 @@ class Tests: XCTestCase {
                     break
                 }
                 })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         waitForExpectations(timeout: 30, handler: nil)
     }
@@ -115,7 +115,7 @@ class Tests: XCTestCase {
                 XCTAssertEqual(data, messageData)
                 dataExp.fulfill()
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         socket.rx.stream
             .subscribe(onNext: { [unowned self] event in
@@ -131,7 +131,7 @@ class Tests: XCTestCase {
                     break
                 }
                 })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         waitForExpectations(timeout: 30, handler: nil)
     }
@@ -149,7 +149,7 @@ class Tests: XCTestCase {
                 XCTAssertEqual(data, pongData)
                 pongExp.fulfill()
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         socket.rx.stream
             .subscribe(onNext: { [unowned self] event in
@@ -165,7 +165,7 @@ class Tests: XCTestCase {
                     break
                 }
                 })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         waitForExpectations(timeout: 30, handler: nil)
     }
@@ -182,13 +182,13 @@ class Tests: XCTestCase {
                 XCTAssertEqual(text, message)
                 exp.fulfill()
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         socket.rx.connect
             .take(1)
             .map { message }
-            .bindTo(socket.rx.text)
-            .addDisposableTo(disposeBag)
+            .bind(to: socket.rx.text)
+            .disposed(by: disposeBag)
         
         waitForExpectations(timeout: 30, handler: nil)
     }
@@ -203,13 +203,13 @@ class Tests: XCTestCase {
                 XCTAssertEqual(data, message)
                 exp.fulfill()
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
         
         socket.rx.connect
             .take(1)
             .map { message }
-            .bindTo(socket.rx.data)
-            .addDisposableTo(disposeBag)
+            .bind(to: socket.rx.data)
+            .disposed(by: disposeBag)
         
         waitForExpectations(timeout: 30, handler: nil)
     }
