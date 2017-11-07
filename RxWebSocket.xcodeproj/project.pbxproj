@@ -1,0 +1,1183 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F224C20F1FB20FAD0031BA1A /* RxWebSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2312FD21FB203C20038FA6A /* RxWebSocket.framework */; };
+		F224C2151FB20FB90031BA1A /* RxWebSocketTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2312F9A1FB1EFE40038FA6A /* RxWebSocketTests.swift */; };
+		F2312F9B1FB1EFE40038FA6A /* RxWebSocketTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2312F9A1FB1EFE40038FA6A /* RxWebSocketTests.swift */; };
+		F2312FAA1FB1F08A0038FA6A /* RxWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2312FA91FB1F08A0038FA6A /* RxWebSocket.swift */; };
+		F2312FBF1FB2013D0038FA6A /* RxWebSocket_macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = F2312FBD1FB2013D0038FA6A /* RxWebSocket_macOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F2312FC31FB201620038FA6A /* RxWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2312FA91FB1F08A0038FA6A /* RxWebSocket.swift */; };
+		F2312FD61FB203C20038FA6A /* RxWebSocket_tvOS.h in Headers */ = {isa = PBXBuildFile; fileRef = F2312FD41FB203C20038FA6A /* RxWebSocket_tvOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F2312FDA1FB203C80038FA6A /* RxWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2312FA91FB1F08A0038FA6A /* RxWebSocket.swift */; };
+		F2312FE41FB204700038FA6A /* RxWebSocket_watchOS.h in Headers */ = {isa = PBXBuildFile; fileRef = F2312FE21FB204700038FA6A /* RxWebSocket_watchOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F2312FE81FB204740038FA6A /* RxWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2312FA91FB1F08A0038FA6A /* RxWebSocket.swift */; };
+		F2312FEB1FB20BA70038FA6A /* RxWebSocket-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = F2312FEA1FB20AAF0038FA6A /* RxWebSocket-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F25E53041FB2131000B197D0 /* RxWebSocketTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2312F9A1FB1EFE40038FA6A /* RxWebSocketTests.swift */; };
+		F25E53051FB2137A00B197D0 /* RxWebSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2312F8C1FB1EFE40038FA6A /* RxWebSocket.framework */; };
+		F25E53061FB213A400B197D0 /* RxWebSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2312FBB1FB2013D0038FA6A /* RxWebSocket.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F224C2101FB20FAD0031BA1A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2312F831FB1EFE40038FA6A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F2312FD11FB203C20038FA6A;
+			remoteInfo = "RxWebSocket-tvOS";
+		};
+		F2312F971FB1EFE40038FA6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2312F831FB1EFE40038FA6A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F2312F8B1FB1EFE40038FA6A;
+			remoteInfo = RxWebSocket;
+		};
+		F25E52FF1FB2128B00B197D0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2312F831FB1EFE40038FA6A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F2312FBA1FB2013D0038FA6A;
+			remoteInfo = "RxWebSocket-macOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F224C20A1FB20FAD0031BA1A /* RxWebSocketTests-tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RxWebSocketTests-tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2312F8C1FB1EFE40038FA6A /* RxWebSocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxWebSocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2312F901FB1EFE40038FA6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2312F951FB1EFE40038FA6A /* RxWebSocketTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RxWebSocketTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2312F9A1FB1EFE40038FA6A /* RxWebSocketTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxWebSocketTests.swift; sourceTree = "<group>"; };
+		F2312F9C1FB1EFE40038FA6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2312FA91FB1F08A0038FA6A /* RxWebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RxWebSocket.swift; path = Classes/RxWebSocket.swift; sourceTree = SOURCE_ROOT; };
+		F2312FBB1FB2013D0038FA6A /* RxWebSocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxWebSocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2312FBD1FB2013D0038FA6A /* RxWebSocket_macOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RxWebSocket_macOS.h; sourceTree = "<group>"; };
+		F2312FBE1FB2013D0038FA6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2312FD21FB203C20038FA6A /* RxWebSocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxWebSocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2312FD41FB203C20038FA6A /* RxWebSocket_tvOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RxWebSocket_tvOS.h; sourceTree = "<group>"; };
+		F2312FD51FB203C20038FA6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2312FE01FB204700038FA6A /* RxWebSocket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxWebSocket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2312FE21FB204700038FA6A /* RxWebSocket_watchOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RxWebSocket_watchOS.h; sourceTree = "<group>"; };
+		F2312FE31FB204700038FA6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2312FEA1FB20AAF0038FA6A /* RxWebSocket-iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RxWebSocket-iOS.h"; sourceTree = "<group>"; };
+		F25E52F91FB2128B00B197D0 /* RxWebSocketTests-macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RxWebSocketTests-macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F224C2071FB20FAD0031BA1A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F224C20F1FB20FAD0031BA1A /* RxWebSocket.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2312F881FB1EFE40038FA6A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2312F921FB1EFE40038FA6A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F25E53051FB2137A00B197D0 /* RxWebSocket.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2312FB71FB2013D0038FA6A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2312FCE1FB203C20038FA6A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2312FDC1FB204700038FA6A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F25E52F61FB2128B00B197D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F25E53061FB213A400B197D0 /* RxWebSocket.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F2312F821FB1EFE40038FA6A = {
+			isa = PBXGroup;
+			children = (
+				F2312F8E1FB1EFE40038FA6A /* RxWebSocket */,
+				F2312F991FB1EFE40038FA6A /* RxWebSocketTests */,
+				F2312FBC1FB2013D0038FA6A /* RxWebSocket-macOS */,
+				F2312FD31FB203C20038FA6A /* RxWebSocket-tvOS */,
+				F2312FE11FB204700038FA6A /* RxWebSocket-watchOS */,
+				F2312F8D1FB1EFE40038FA6A /* Products */,
+				F2312FAB1FB1F1880038FA6A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		F2312F8D1FB1EFE40038FA6A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F2312F8C1FB1EFE40038FA6A /* RxWebSocket.framework */,
+				F2312F951FB1EFE40038FA6A /* RxWebSocketTests.xctest */,
+				F2312FBB1FB2013D0038FA6A /* RxWebSocket.framework */,
+				F2312FD21FB203C20038FA6A /* RxWebSocket.framework */,
+				F2312FE01FB204700038FA6A /* RxWebSocket.framework */,
+				F224C20A1FB20FAD0031BA1A /* RxWebSocketTests-tvOS.xctest */,
+				F25E52F91FB2128B00B197D0 /* RxWebSocketTests-macOS.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F2312F8E1FB1EFE40038FA6A /* RxWebSocket */ = {
+			isa = PBXGroup;
+			children = (
+				F2312FA91FB1F08A0038FA6A /* RxWebSocket.swift */,
+				F2312F901FB1EFE40038FA6A /* Info.plist */,
+				F2312FEA1FB20AAF0038FA6A /* RxWebSocket-iOS.h */,
+			);
+			path = RxWebSocket;
+			sourceTree = "<group>";
+		};
+		F2312F991FB1EFE40038FA6A /* RxWebSocketTests */ = {
+			isa = PBXGroup;
+			children = (
+				F2312F9A1FB1EFE40038FA6A /* RxWebSocketTests.swift */,
+				F2312F9C1FB1EFE40038FA6A /* Info.plist */,
+			);
+			path = RxWebSocketTests;
+			sourceTree = "<group>";
+		};
+		F2312FAB1FB1F1880038FA6A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F2312FBC1FB2013D0038FA6A /* RxWebSocket-macOS */ = {
+			isa = PBXGroup;
+			children = (
+				F2312FBD1FB2013D0038FA6A /* RxWebSocket_macOS.h */,
+				F2312FBE1FB2013D0038FA6A /* Info.plist */,
+			);
+			path = "RxWebSocket-macOS";
+			sourceTree = "<group>";
+		};
+		F2312FD31FB203C20038FA6A /* RxWebSocket-tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				F2312FD41FB203C20038FA6A /* RxWebSocket_tvOS.h */,
+				F2312FD51FB203C20038FA6A /* Info.plist */,
+			);
+			path = "RxWebSocket-tvOS";
+			sourceTree = "<group>";
+		};
+		F2312FE11FB204700038FA6A /* RxWebSocket-watchOS */ = {
+			isa = PBXGroup;
+			children = (
+				F2312FE21FB204700038FA6A /* RxWebSocket_watchOS.h */,
+				F2312FE31FB204700038FA6A /* Info.plist */,
+			);
+			path = "RxWebSocket-watchOS";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		F2312F891FB1EFE40038FA6A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2312FEB1FB20BA70038FA6A /* RxWebSocket-iOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2312FB81FB2013D0038FA6A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2312FBF1FB2013D0038FA6A /* RxWebSocket_macOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2312FCF1FB203C20038FA6A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2312FD61FB203C20038FA6A /* RxWebSocket_tvOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2312FDD1FB204700038FA6A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2312FE41FB204700038FA6A /* RxWebSocket_watchOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		F224C2091FB20FAD0031BA1A /* RxWebSocketTests-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F224C2141FB20FAD0031BA1A /* Build configuration list for PBXNativeTarget "RxWebSocketTests-tvOS" */;
+			buildPhases = (
+				F219FCD71FB4BA97000255A1 /* [WS] Start echoserver */,
+				F224C2061FB20FAD0031BA1A /* Sources */,
+				F224C2071FB20FAD0031BA1A /* Frameworks */,
+				F224C2081FB20FAD0031BA1A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F224C2111FB20FAD0031BA1A /* PBXTargetDependency */,
+			);
+			name = "RxWebSocketTests-tvOS";
+			productName = "RxWebSocketTests-tvOS";
+			productReference = F224C20A1FB20FAD0031BA1A /* RxWebSocketTests-tvOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F2312F8B1FB1EFE40038FA6A /* RxWebSocket-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2312FA01FB1EFE40038FA6A /* Build configuration list for PBXNativeTarget "RxWebSocket-iOS" */;
+			buildPhases = (
+				F219FCD81FB4C558000255A1 /* Check dependencies */,
+				F2312F871FB1EFE40038FA6A /* Sources */,
+				F2312F881FB1EFE40038FA6A /* Frameworks */,
+				F2312F891FB1EFE40038FA6A /* Headers */,
+				F2312F8A1FB1EFE40038FA6A /* Resources */,
+				F2312FE91FB206AE0038FA6A /* Swiftlint */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "RxWebSocket-iOS";
+			productName = RxWebSocket;
+			productReference = F2312F8C1FB1EFE40038FA6A /* RxWebSocket.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		F2312F941FB1EFE40038FA6A /* RxWebSocketTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2312FA31FB1EFE40038FA6A /* Build configuration list for PBXNativeTarget "RxWebSocketTests" */;
+			buildPhases = (
+				F2312FA81FB1F01D0038FA6A /* [WS] Start echoserver */,
+				F2312F911FB1EFE40038FA6A /* Sources */,
+				F2312F921FB1EFE40038FA6A /* Frameworks */,
+				F2312F931FB1EFE40038FA6A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F2312F981FB1EFE40038FA6A /* PBXTargetDependency */,
+			);
+			name = RxWebSocketTests;
+			productName = RxWebSocketTests;
+			productReference = F2312F951FB1EFE40038FA6A /* RxWebSocketTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F2312FBA1FB2013D0038FA6A /* RxWebSocket-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2312FC01FB2013D0038FA6A /* Build configuration list for PBXNativeTarget "RxWebSocket-macOS" */;
+			buildPhases = (
+				F219FCD91FB4C6D8000255A1 /* Check dependencies */,
+				F2312FB61FB2013D0038FA6A /* Sources */,
+				F2312FB71FB2013D0038FA6A /* Frameworks */,
+				F2312FB81FB2013D0038FA6A /* Headers */,
+				F2312FB91FB2013D0038FA6A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "RxWebSocket-macOS";
+			productName = "RxWebSocket-macOS";
+			productReference = F2312FBB1FB2013D0038FA6A /* RxWebSocket.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		F2312FD11FB203C20038FA6A /* RxWebSocket-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2312FD71FB203C20038FA6A /* Build configuration list for PBXNativeTarget "RxWebSocket-tvOS" */;
+			buildPhases = (
+				F219FCDA1FB4C6E5000255A1 /* Check dependencies */,
+				F2312FCD1FB203C20038FA6A /* Sources */,
+				F2312FCE1FB203C20038FA6A /* Frameworks */,
+				F2312FCF1FB203C20038FA6A /* Headers */,
+				F2312FD01FB203C20038FA6A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "RxWebSocket-tvOS";
+			productName = "RxWebSocket-tvOS";
+			productReference = F2312FD21FB203C20038FA6A /* RxWebSocket.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		F2312FDF1FB204700038FA6A /* RxWebSocket-watchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2312FE51FB204700038FA6A /* Build configuration list for PBXNativeTarget "RxWebSocket-watchOS" */;
+			buildPhases = (
+				F219FCDB1FB4C6F4000255A1 /* Check dependencies */,
+				F2312FDB1FB204700038FA6A /* Sources */,
+				F2312FDC1FB204700038FA6A /* Frameworks */,
+				F2312FDD1FB204700038FA6A /* Headers */,
+				F2312FDE1FB204700038FA6A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "RxWebSocket-watchOS";
+			productName = "RxWebSocket-watchOS";
+			productReference = F2312FE01FB204700038FA6A /* RxWebSocket.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		F25E52F81FB2128B00B197D0 /* RxWebSocketTests-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F25E53011FB2128B00B197D0 /* Build configuration list for PBXNativeTarget "RxWebSocketTests-macOS" */;
+			buildPhases = (
+				F219FCD61FB4BA8A000255A1 /* [WS] Start echoserver */,
+				F25E52F51FB2128B00B197D0 /* Sources */,
+				F25E52F61FB2128B00B197D0 /* Frameworks */,
+				F25E52F71FB2128B00B197D0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F25E53001FB2128B00B197D0 /* PBXTargetDependency */,
+			);
+			name = "RxWebSocketTests-macOS";
+			productName = "RxWebSocketTests-macOS";
+			productReference = F25E52F91FB2128B00B197D0 /* RxWebSocketTests-macOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F2312F831FB1EFE40038FA6A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0910;
+				LastUpgradeCheck = 0910;
+				ORGANIZATIONNAME = RxWebSocket;
+				TargetAttributes = {
+					F224C2091FB20FAD0031BA1A = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
+					F2312F8B1FB1EFE40038FA6A = {
+						CreatedOnToolsVersion = 9.1;
+						LastSwiftMigration = 0910;
+						ProvisioningStyle = Automatic;
+					};
+					F2312F941FB1EFE40038FA6A = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
+					F2312FBA1FB2013D0038FA6A = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
+					F2312FD11FB203C20038FA6A = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
+					F2312FDF1FB204700038FA6A = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
+					F25E52F81FB2128B00B197D0 = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = F2312F861FB1EFE40038FA6A /* Build configuration list for PBXProject "RxWebSocket" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F2312F821FB1EFE40038FA6A;
+			productRefGroup = F2312F8D1FB1EFE40038FA6A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F2312F8B1FB1EFE40038FA6A /* RxWebSocket-iOS */,
+				F2312F941FB1EFE40038FA6A /* RxWebSocketTests */,
+				F2312FBA1FB2013D0038FA6A /* RxWebSocket-macOS */,
+				F25E52F81FB2128B00B197D0 /* RxWebSocketTests-macOS */,
+				F2312FD11FB203C20038FA6A /* RxWebSocket-tvOS */,
+				F224C2091FB20FAD0031BA1A /* RxWebSocketTests-tvOS */,
+				F2312FDF1FB204700038FA6A /* RxWebSocket-watchOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F224C2081FB20FAD0031BA1A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2312F8A1FB1EFE40038FA6A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2312F931FB1EFE40038FA6A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2312FB91FB2013D0038FA6A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2312FD01FB203C20038FA6A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2312FDE1FB204700038FA6A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F25E52F71FB2128B00B197D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F219FCD61FB4BA8A000255A1 /* [WS] Start echoserver */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[WS] Start echoserver";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "sh \"${PROJECT_DIR}/server.sh\" start";
+		};
+		F219FCD71FB4BA97000255A1 /* [WS] Start echoserver */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[WS] Start echoserver";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "sh \"${PROJECT_DIR}/server.sh\" start";
+		};
+		F219FCD81FB4C558000255A1 /* Check dependencies */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check dependencies";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PROJECT_DIR}/install_dependencies.sh\" verify";
+			showEnvVarsInLog = 0;
+		};
+		F219FCD91FB4C6D8000255A1 /* Check dependencies */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check dependencies";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PROJECT_DIR}/install_dependencies.sh\" verify";
+		};
+		F219FCDA1FB4C6E5000255A1 /* Check dependencies */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check dependencies";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PROJECT_DIR}/install_dependencies.sh\" verify";
+		};
+		F219FCDB1FB4C6F4000255A1 /* Check dependencies */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check dependencies";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PROJECT_DIR}/install_dependencies.sh\" verify";
+		};
+		F2312FA81FB1F01D0038FA6A /* [WS] Start echoserver */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[WS] Start echoserver";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "sh \"${PROJECT_DIR}/server.sh\" start\n";
+		};
+		F2312FE91FB206AE0038FA6A /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n swiftlint\nelse\n echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F224C2061FB20FAD0031BA1A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F224C2151FB20FB90031BA1A /* RxWebSocketTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2312F871FB1EFE40038FA6A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2312FAA1FB1F08A0038FA6A /* RxWebSocket.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2312F911FB1EFE40038FA6A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2312F9B1FB1EFE40038FA6A /* RxWebSocketTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2312FB61FB2013D0038FA6A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2312FC31FB201620038FA6A /* RxWebSocket.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2312FCD1FB203C20038FA6A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2312FDA1FB203C80038FA6A /* RxWebSocket.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2312FDB1FB204700038FA6A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2312FE81FB204740038FA6A /* RxWebSocket.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F25E52F51FB2128B00B197D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F25E53041FB2131000B197D0 /* RxWebSocketTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F224C2111FB20FAD0031BA1A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F2312FD11FB203C20038FA6A /* RxWebSocket-tvOS */;
+			targetProxy = F224C2101FB20FAD0031BA1A /* PBXContainerItemProxy */;
+		};
+		F2312F981FB1EFE40038FA6A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F2312F8B1FB1EFE40038FA6A /* RxWebSocket-iOS */;
+			targetProxy = F2312F971FB1EFE40038FA6A /* PBXContainerItemProxy */;
+		};
+		F25E53001FB2128B00B197D0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F2312FBA1FB2013D0038FA6A /* RxWebSocket-macOS */;
+			targetProxy = F25E52FF1FB2128B00B197D0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F224C2121FB20FAD0031BA1A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/tvOS";
+				INFOPLIST_FILE = "RxWebSocket-tvOS/Info-Tests.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.flaviocaetano.RxWebSocketTests-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.1;
+			};
+			name = Debug;
+		};
+		F224C2131FB20FAD0031BA1A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/tvOS";
+				INFOPLIST_FILE = "RxWebSocket-tvOS/Info-Tests.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.flaviocaetano.RxWebSocketTests-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.1;
+			};
+			name = Release;
+		};
+		F2312F9E1FB1EFE40038FA6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F2312F9F1FB1EFE40038FA6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		F2312FA11FB1EFE40038FA6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = RxWebSocket/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.flaviocaetano.RxWebSocket;
+				PRODUCT_NAME = RxWebSocket;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F2312FA21FB1EFE40038FA6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = RxWebSocket/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.flaviocaetano.RxWebSocket;
+				PRODUCT_NAME = RxWebSocket;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F2312FA41FB1EFE40038FA6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = RxWebSocketTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.flaviocaetano.RxWebSocketTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F2312FA51FB1EFE40038FA6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = RxWebSocketTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.flaviocaetano.RxWebSocketTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F2312FC11FB2013D0038FA6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "RxWebSocket-macOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.flaviocaetano.RxWebSocket-macOS";
+				PRODUCT_NAME = RxWebSocket;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		F2312FC21FB2013D0038FA6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "RxWebSocket-macOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.flaviocaetano.RxWebSocket-macOS";
+				PRODUCT_NAME = RxWebSocket;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		F2312FD81FB203C20038FA6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/build/tvOS";
+				INFOPLIST_FILE = "RxWebSocket-tvOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.flaviocaetano.RxWebSocket;
+				PRODUCT_NAME = RxWebSocket;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Debug;
+		};
+		F2312FD91FB203C20038FA6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/build/tvOS";
+				INFOPLIST_FILE = "RxWebSocket-tvOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.flaviocaetano.RxWebSocket;
+				PRODUCT_NAME = RxWebSocket;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Release;
+		};
+		F2312FE61FB204700038FA6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/build/watchOS";
+				INFOPLIST_FILE = "RxWebSocket-watchOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.flaviocaetano.RxWebSocket-watchOS";
+				PRODUCT_NAME = RxWebSocket;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		F2312FE71FB204700038FA6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/build/watchOS";
+				INFOPLIST_FILE = "RxWebSocket-watchOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.flaviocaetano.RxWebSocket-watchOS";
+				PRODUCT_NAME = RxWebSocket;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		F25E53021FB2128B00B197D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/Mac";
+				INFOPLIST_FILE = "RxWebSocket-macOS/Info-Tests.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks $(PROJECT_DIR)/Carthage/Build/Mac";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.flaviocaetano.RxWebSocketTests-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		F25E53031FB2128B00B197D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/Mac";
+				INFOPLIST_FILE = "RxWebSocket-macOS/Info-Tests.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks $(PROJECT_DIR)/Carthage/Build/Mac";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.flaviocaetano.RxWebSocketTests-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F224C2141FB20FAD0031BA1A /* Build configuration list for PBXNativeTarget "RxWebSocketTests-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F224C2121FB20FAD0031BA1A /* Debug */,
+				F224C2131FB20FAD0031BA1A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F2312F861FB1EFE40038FA6A /* Build configuration list for PBXProject "RxWebSocket" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2312F9E1FB1EFE40038FA6A /* Debug */,
+				F2312F9F1FB1EFE40038FA6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F2312FA01FB1EFE40038FA6A /* Build configuration list for PBXNativeTarget "RxWebSocket-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2312FA11FB1EFE40038FA6A /* Debug */,
+				F2312FA21FB1EFE40038FA6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F2312FA31FB1EFE40038FA6A /* Build configuration list for PBXNativeTarget "RxWebSocketTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2312FA41FB1EFE40038FA6A /* Debug */,
+				F2312FA51FB1EFE40038FA6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F2312FC01FB2013D0038FA6A /* Build configuration list for PBXNativeTarget "RxWebSocket-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2312FC11FB2013D0038FA6A /* Debug */,
+				F2312FC21FB2013D0038FA6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F2312FD71FB203C20038FA6A /* Build configuration list for PBXNativeTarget "RxWebSocket-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2312FD81FB203C20038FA6A /* Debug */,
+				F2312FD91FB203C20038FA6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F2312FE51FB204700038FA6A /* Build configuration list for PBXNativeTarget "RxWebSocket-watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2312FE61FB204700038FA6A /* Debug */,
+				F2312FE71FB204700038FA6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F25E53011FB2128B00B197D0 /* Build configuration list for PBXNativeTarget "RxWebSocketTests-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F25E53021FB2128B00B197D0 /* Debug */,
+				F25E53031FB2128B00B197D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F2312F831FB1EFE40038FA6A /* Project object */;
+}

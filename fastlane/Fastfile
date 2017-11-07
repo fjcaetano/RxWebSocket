@@ -10,45 +10,38 @@ default_platform :ios
 platform :ios do
   skip_docs
 
-  devices = [
-    "iPhone X (11.0)",
-    "iPhone 7 (10.0)",
-    "iPhone 6 (9.0)",
-    "iPhone 5s (8.1)"
-  ]
+  before_all do
+    begin
+      sh "../server.sh start"
+    rescue => e
+    end
+
+    carthage(
+      command: "bootstrap",
+      cache_builds: true,
+    )
+
+    swiftlint(
+      reporter: "emoji",
+      strict: true,
+    )
+  end
 
   desc "Runs the following lanes:\n- test\n- pod_lint\n- carthage_lint"
   lane :ci do
     test
+    tvOS
+    macOS
     pod_lint
-    # carthage_lint
-  end
-
-  desc "Starts websocket echoserver for testing"
-  lane :start_server do
-    sh "../server.sh start"
-  end
-
-  desc "Stops websocket echoserver for testing"
-  lane :stop_server do
-    sh "../server.sh stop"
+    carthage_lint
   end
 
   desc "Runs all the tests"
   lane :test do
-    begin
-      start_server
-    rescue => e
-    end
-
-    cocoapods(
-      podfile: "Example/Podfile",
-    )
-
-    swiftlint(
-      executable: "Example/Pods/Swiftlint/swiftlint",
-      strict: true,
-    )
+    devices = ["iPhone X (11.0)"]
+    devices << "iPhone 7 (10.0)" if !Helper.is_ci?
+    devices << "iPhone 6 (9.0)" if !Helper.is_ci?
+    devices << "iPhone 5s (8.1)" if !Helper.is_ci?
 
     # The problem lies in the fact (or rather: serious bug in xcodebuild) that
     # the timeout for connecting to the XCTest server starts at the moment you
@@ -59,21 +52,20 @@ platform :ios do
     scan(
       build_for_testing: true,
       devices: devices,
-      scheme: "RxWebSocket-Example",
-      workspace: "Example/RxWebSocket.xcworkspace",
+      scheme: "RxWebSocket-iOS",
+      project: "RxWebSocket.xcodeproj",
       code_coverage: true,
     )
 
     scan(
       test_without_building: true,
       devices: devices,
-      scheme: "RxWebSocket-Example",
-      workspace: "Example/RxWebSocket.xcworkspace",
+      scheme: "RxWebSocket-iOS",
+      project: "RxWebSocket.xcodeproj",
       code_coverage: true,
     )
 
-    if is_ci
-      puts "Uploading coverage files to CodeCov"
+    if Helper.is_ci?
       codecov(
         project_name: 'RxWebSocket',
         use_xcodeplist: true,
@@ -85,6 +77,10 @@ platform :ios do
 
   desc "Lint Cocoapods Lib"
   lane :pod_lint do
+    cocoapods(
+      podfile: "Example/Podfile"
+    )
+
     pod_lib_lint(
       allow_warnings: true, # Remove this when Starscream stops warning
     )
@@ -106,7 +102,7 @@ platform :ios do
 
   desc "Deploy a new version to Github and Cocoapods"
   lane :release do
-    ci unless is_ci
+    ci unless Helper.is_ci?
 
     carthage(
       command: "archive",
@@ -131,25 +127,71 @@ platform :ios do
       upload_assets: ["RxWebSocket.framework.zip"],
       description: changelog,
     )
+  end
 
+  desc "Runs tests against tvOS"
+  lane :tvOS do
+    devices = [
+      "Apple TV 4K (11.1)",
+      "Apple TV 1080p (10.0)",
+      "Apple TV 1080p (9.0)",
+    ]
+
+    # The problem lies in the fact (or rather: serious bug in xcodebuild) that
+    # the timeout for connecting to the XCTest server starts at the moment you
+    # issue the command xcodebuild. The timeout is 120 seconds, so if your
+    # compilation + startup of the simulator takes longer than 2 minutes
+    # xcodebuild will give this "Canceling tests due to timeout" error.
+    # https://stackoverflow.com/questions/37922146/xctests-failing-on-physical-device-canceling-tests-due-to-timeout/40790171#40790171
+    scan(
+      build_for_testing: true,
+      devices: devices,
+      scheme: "RxWebSocket-tvOS",
+      project: "RxWebSocket.xcodeproj",
+    )
+
+    scan(
+      test_without_building: true,
+      devices: devices,
+      scheme: "RxWebSocket-tvOS",
+      project: "RxWebSocket.xcodeproj",
+    )
+  end
+
+  desc "Run tests against macOS"
+  lane :macOS do
+    # The problem lies in the fact (or rather: serious bug in xcodebuild) that
+    # the timeout for connecting to the XCTest server starts at the moment you
+    # issue the command xcodebuild. The timeout is 120 seconds, so if your
+    # compilation + startup of the simulator takes longer than 2 minutes
+    # xcodebuild will give this "Canceling tests due to timeout" error.
+    # https://stackoverflow.com/questions/37922146/xctests-failing-on-physical-device-canceling-tests-due-to-timeout/40790171#40790171
+    scan(
+      build_for_testing: true,
+      scheme: "RxWebSocket-macOS",
+      project: "RxWebSocket.xcodeproj",
+      destination: "platform=macOS",
+    )
+
+    scan(
+      test_without_building: true,
+      scheme: "RxWebSocket-macOS",
+      project: "RxWebSocket.xcodeproj",
+      destination: "platform=macOS",
+    )
+  end
+
+  after_all do |lane|
     begin
-      stop_server
+      sh "../server.sh stop"
     rescue => e
     end
   end
 
-  after_all do |lane|
-    # This block is called, only if the executed lane was successful
-
-    # slack(
-    #   message: "Successfully deployed new App Update."
-    # )
-  end
-
   error do |lane, exception|
-    # slack(
-    #   message: exception.message,
-    #   success: false
-    # )
+    begin
+      sh "../server.sh stop"
+    rescue => e
+    end
   end
 end
