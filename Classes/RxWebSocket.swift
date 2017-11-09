@@ -33,7 +33,8 @@ open class RxWebSocket: WebSocket {
         case data(Data)
     }
 
-    fileprivate let publishStream: PublishSubject<StreamEvent>
+    fileprivate let connectSubject: ReplaySubject<StreamEvent>
+    fileprivate let eventSubject: PublishSubject<StreamEvent>
 
     /**
      - parameters:
@@ -47,15 +48,18 @@ open class RxWebSocket: WebSocket {
      */
     override public init(request: URLRequest, protocols: [String]? = nil, stream: WSStream = FoundationStream()) {
         let publish = PublishSubject<StreamEvent>()
-        publishStream = publish
+        eventSubject = publish
+
+        let replay = ReplaySubject<StreamEvent>.create(bufferSize: 1)
+        connectSubject = replay
 
         super.init(request: request, protocols: protocols, stream: stream)
 
-        super.onConnect = { publish.onNext(.connect) }
-        super.onDisconnect = { publish.onNext(.disconnect($0)) }
+        super.onConnect = { replay.onNext(.connect) }
         super.onText = { publish.onNext(.text($0)) }
         super.onData = { publish.onNext(.data($0)) }
         super.onPong = { publish.onNext(.pong($0)) }
+        super.onDisconnect = { replay.onNext(.disconnect($0)) }
 
         connect()
     }
@@ -152,7 +156,7 @@ public extension Reactive where Base: RxWebSocket {
     }
 
     /// The stream of messages received by the websocket.
-    public var stream: Observable<RxWebSocket.StreamEvent> {
-        return base.publishStream.asObservable()
+    public var stream: Observable<Base.StreamEvent> {
+        return Observable.merge(base.connectSubject, base.eventSubject)
     }
 }

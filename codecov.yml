@@ -4,7 +4,7 @@ codecov:
 coverage:
   precision: 2
   round: down
-  range: "60...90"
+  range: "75...95"
 
   status:
     project:
@@ -24,3 +24,4 @@ coverage:
 
 ignore:
   - "Example/"
+  - "RxWebSocketTests"

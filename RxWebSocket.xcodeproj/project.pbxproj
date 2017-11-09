@@ -21,6 +21,9 @@
 		F25E53041FB2131000B197D0 /* RxWebSocketTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2312F9A1FB1EFE40038FA6A /* RxWebSocketTests.swift */; };
 		F25E53051FB2137A00B197D0 /* RxWebSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2312F8C1FB1EFE40038FA6A /* RxWebSocket.framework */; };
 		F25E53061FB213A400B197D0 /* RxWebSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2312FBB1FB2013D0038FA6A /* RxWebSocket.framework */; };
+		F2F976411FB509D5006E5AEA /* RxWebSocket_StreamEvent+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F976401FB509D5006E5AEA /* RxWebSocket_StreamEvent+Equatable.swift */; };
+		F2F976421FB5DBB2006E5AEA /* RxWebSocket_StreamEvent+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F976401FB509D5006E5AEA /* RxWebSocket_StreamEvent+Equatable.swift */; };
+		F2F976431FB5DBB2006E5AEA /* RxWebSocket_StreamEvent+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F976401FB509D5006E5AEA /* RxWebSocket_StreamEvent+Equatable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +69,7 @@
 		F2312FE31FB204700038FA6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2312FEA1FB20AAF0038FA6A /* RxWebSocket-iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RxWebSocket-iOS.h"; sourceTree = "<group>"; };
 		F25E52F91FB2128B00B197D0 /* RxWebSocketTests-macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RxWebSocketTests-macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2F976401FB509D5006E5AEA /* RxWebSocket_StreamEvent+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxWebSocket_StreamEvent+Equatable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +170,7 @@
 			children = (
 				F2312F9A1FB1EFE40038FA6A /* RxWebSocketTests.swift */,
 				F2312F9C1FB1EFE40038FA6A /* Info.plist */,
+				F2F976401FB509D5006E5AEA /* RxWebSocket_StreamEvent+Equatable.swift */,
 			);
 			path = RxWebSocketTests;
 			sourceTree = "<group>";
@@ -614,6 +619,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F224C2151FB20FB90031BA1A /* RxWebSocketTests.swift in Sources */,
+				F2F976431FB5DBB2006E5AEA /* RxWebSocket_StreamEvent+Equatable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,6 +636,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2312F9B1FB1EFE40038FA6A /* RxWebSocketTests.swift in Sources */,
+				F2F976411FB509D5006E5AEA /* RxWebSocket_StreamEvent+Equatable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -662,6 +669,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F25E53041FB2131000B197D0 /* RxWebSocketTests.swift in Sources */,
+				F2F976421FB5DBB2006E5AEA /* RxWebSocket_StreamEvent+Equatable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

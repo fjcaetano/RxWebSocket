@@ -5,4 +5,4 @@ install:
   - ./install_dependencies.sh
 
 script:
-  - fastlane ci
+  - bundle exec fastlane ci

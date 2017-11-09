@@ -4,35 +4,30 @@ cd "${0%/*}"
 
 set -o pipefail
 
-LOGS_PATH="/tmp/RxWebSocket_Install"
-mkdir $LOGS_PATH > /dev/null 2>&1
 mkdir build > /dev/null 2>&1
 
+exe() { echo "\$ ${@/eval/}" ; "$@" ; }
+
 verify() {
-  if [ ! $(which $0) ]; then
-    echo 'ERROR: $0 still not installed. Aborting'
+  if [ ! $(which $1) ]; then
+    echo 'ERROR: $1 still not installed. Aborting'
     exit 1
   fi
 }
 
-# Fastlane
-install_fastlane() {
-  echo "Installing Fastlane"
-
-  if [ $(which fastlane) ] || [ $(bundle check) ]; then
-    echo ' -> Fastlane already installed'
-    return
-  fi
+# Bundle
+install_bundle() {
+  echo 'Installing bundle'
 
   # Bundle install
-  if [ $(which bundle ) ]; then
-    bundle install
-  else
-    gem install bundler
+  if [ ! $(which bundle) ]; then
+    exe gem install bundler
   fi
 
+  exe bundle install
+
   if [ ! $(bundle check) ]; then
-    echo "ERROR: fastlane still not installed. Aborting"
+    echo "ERROR: bundle still not installed. Aborting"
     exit 1
   fi
 }
@@ -49,21 +44,21 @@ install_wstest() {
   if [ ! -f venv/bin/activate ]; then
     if [[ $(which virtualenv) ]]; then
       echo 'Creating virtual env'
-      virtualenv "$(pwd)/venv" > "$LOGS_PATH/venv.log" 2>&1
+      exe virtualenv "$(pwd)/venv"
     else
       echo ' -> Virtual env not installed. Attempting to install anyway'
     fi
   fi
 
-  source venv/bin/activate
+  exe source venv/bin/activate
 
   if [[ ! $(which pip) ]]; then
     echo 'Installing pip'
-    easy_install --user pip > "$LOGS_PATH/pip.log" && export PATH=/Users/travis/Library/Python/2.7/bin:${PATH}
+    exe easy_install --user pip && export PATH=/Users/travis/Library/Python/2.7/bin:${PATH}
   fi
 
   echo 'Installing wstest'
-  pip install -r requirements.txt > "$LOGS_PATH/requirements.log"
+  exe pip install -r requirements.txt
 
   verify "wstest"
 }
@@ -77,21 +72,21 @@ install_swiftlint() {
     return
   fi
 
-  brew install swiftlint > "$LOGS_PATH/swiftlint.log"
+  exe brew install swiftlint
 
   verify "swiftlint"
 }
 
 xcode_error() {
-  if [[ ! -z $XCODE_VERSION_MAJOR ]]; then
+  if [[ ! -z "$XCODE_VERSION_MAJOR" ]]; then
     echo "$(pwd)/Classes/RxWebSocket.swift:$1: "
   else
     echo ""
   fi
 }
 
-if [[ $1 == 'verify' ]]; then
-  if [ ! -f build/.deps ]; then
+if [[ "$1" == 'verify' ]]; then
+  if [ ! -f build/.deps ] && [ "$CARTHAGE" != "YES" ]; then
     echo `xcode_error 1` "error: Dependencies not installed"
     echo `xcode_error 2` "error: Run \`$(pwd)/install_dependencies.sh\` to install all required dependencies"
     exit 2
@@ -100,10 +95,9 @@ if [[ $1 == 'verify' ]]; then
   exit 0
 fi
 
-install_fastlane
+install_bundle
 install_wstest
 install_swiftlint
 echo 'Success! All requirements are installed'
-echo "Logs can be found at $LOGS_PATH"
 
 touch build/.deps

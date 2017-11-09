@@ -6,6 +6,7 @@
 //  Copyright © 2016 RxWebSocket. All rights reserved.
 //
 
+import RxBlocking
 import RxSwift
 @testable import RxWebSocket
 import Starscream
@@ -15,18 +16,15 @@ import XCTest
 class RxWebSocketTests: XCTestCase {
 
     private var socket: RxWebSocket!
-    private var disposeBag: DisposeBag!
 
     override func setUp() {
         super.setUp()
 
         socket = RxWebSocket(url: URL(string: "ws://127.0.0.1:9000")!)
-        disposeBag = DisposeBag()
     }
 
     override func tearDown() {
         socket.disconnect()
-        disposeBag = nil
 
         super.tearDown()
     }
@@ -34,189 +32,258 @@ class RxWebSocketTests: XCTestCase {
     // MARK: - Reactive components
 
     func test__Connect_Cycle() {
-        let connectStreamExp = expectation(description: "Stream did connect")
-        let connectExp = expectation(description: "Did connect")
+        do {
+            try socket.rx.connect
+                .toBlocking(timeout: 10)
+                .first()
+        }
+        catch let e {
+            XCTFail(e.localizedDescription)
+        }
 
-        let disconnectStreamExp = expectation(description: "Stream did disconnect")
-        let disconnectExp = expectation(description: "Did disconnect")
+        socket.disconnect()
 
-        socket.rx.connect
-            .take(1)
-            .subscribe(onNext: {
-                connectExp.fulfill()
-            })
-            .disposed(by: disposeBag)
+        do {
+            let error = try socket.rx.disconnect
+                .toBlocking(timeout: 10)
+                .first()
+                .flatMap { $0 } // Double optional: Error??
 
-        socket.rx.disconnect
-            .take(1)
-            .subscribe(onNext: { error in
-                XCTAssertNotNil(error)
-                XCTAssertEqual((error! as NSError).code, Int(CloseCode.normal.rawValue))
-                disconnectExp.fulfill()
-            })
-            .disposed(by: disposeBag)
-
-        socket.rx.stream
-            .subscribe(onNext: { [unowned self] event in
-                switch event {
-                case .connect:
-                    connectStreamExp.fulfill()
-                    self.socket.disconnect()
-
-                case .disconnect:
-                    disconnectStreamExp.fulfill()
-
-                default:
-                    break
-                }
-            })
-            .disposed(by: disposeBag)
-
-
-        waitForExpectations(timeout: 30, handler: nil)
+            XCTAssertNotNil(error)
+            XCTAssertEqual((error! as NSError).code, Int(CloseCode.normal.rawValue))
+        }
+        catch let e {
+            XCTFail(e.localizedDescription)
+        }
     }
 
     func test__Receive_Message() {
         let messageString = "messageString"
 
-        let streamExp = expectation(description: "Stream did receive text message")
-        let textExp = expectation(description: "Did receive text message")
+        do {
+            _ = socket.rx.connect
+                .take(1)
+                .subscribe(onNext: { [weak socket] in
+                    socket?.write(string: messageString)
+                })
 
-        socket.rx.text
-            .take(1)
-            .subscribe(onNext: { result in
-                XCTAssertEqual(result, messageString)
-                textExp.fulfill()
-            })
-            .disposed(by: disposeBag)
+            let result = try socket.rx.text
+                .toBlocking(timeout: 10)
+                .first()
 
-        socket.rx.stream
-            .subscribe(onNext: { [unowned self] event in
-                switch event {
-                case .connect:
-                    self.socket.write(string: messageString)
-
-                case .text(let string):
-                    XCTAssertEqual(string, messageString)
-                    streamExp.fulfill()
-
-                default:
-                    break
-                }
-            })
-            .disposed(by: disposeBag)
-
-        waitForExpectations(timeout: 30, handler: nil)
+            XCTAssertEqual(result, messageString)
+        }
+        catch let e {
+            XCTFail(e.localizedDescription)
+        }
     }
 
     func test__Receive_Data() {
         let messageData = "messageString".data(using: String.Encoding.utf8)!
 
-        let streamExp = expectation(description: "Stream did receive data message")
-        let dataExp = expectation(description: "Did receive data message")
+        do {
+            _ = socket.rx.connect
+                .take(1)
+                .subscribe(onNext: { [weak socket] in
+                    socket?.write(data: messageData)
+                })
 
-        socket.rx.data
-            .take(1)
-            .subscribe(onNext: { data in
-                XCTAssertEqual(data, messageData)
-                dataExp.fulfill()
-            })
-            .disposed(by: disposeBag)
+            let result = try socket.rx.data
+                .toBlocking(timeout: 10)
+                .first()
 
-        socket.rx.stream
-            .subscribe(onNext: { [unowned self] event in
-                switch event {
-                case .connect:
-                    self.socket.write(data: messageData)
-
-                case .data(let data):
-                    XCTAssertEqual(data, messageData)
-                    streamExp.fulfill()
-
-                default:
-                    break
-                }
-            })
-            .disposed(by: disposeBag)
-
-        waitForExpectations(timeout: 30, handler: nil)
+            XCTAssertEqual(result, messageData)
+        }
+        catch let e {
+            XCTFail(e.localizedDescription)
+        }
     }
 
     func test__Receive_Pong() {
         var randomNumber = Int64(arc4random())
         let pongData = Data(bytes: &randomNumber, count: MemoryLayout<Int64>.size)
 
-        let streamExp = expectation(description: "Stream did receive pong")
-        let pongExp = expectation(description: "Did receive pong")
+        do {
+            _ = socket.rx.connect
+                .take(1)
+                .subscribe(onNext: { [weak socket] in
+                    socket?.write(ping: pongData)
+                })
 
-        socket.rx.pong
-            .take(1)
-            .subscribe(onNext: { data in
-                XCTAssertEqual(data, pongData)
-                pongExp.fulfill()
-            })
-            .disposed(by: disposeBag)
+            let result = try socket.rx.pong
+                .toBlocking(timeout: 10)
+                .first()
+                .flatMap { $0 } // Double optional: Data??
 
-        socket.rx.stream
-            .subscribe(onNext: { [unowned self] event in
-                switch event {
-                case .connect:
-                    self.socket.write(ping: pongData)
+            XCTAssertEqual(result, pongData)
+        }
+        catch let e {
+            XCTFail(e.localizedDescription)
+        }
+    }
 
-                case .pong(let data):
-                    XCTAssertEqual(data, pongData)
-                    streamExp.fulfill()
+    func test__Receive_Stream() {
+        do {
+            // Receives connect
+            _ = try socket.rx.stream
+                .filter { $0 == .connect }
+                .toBlocking(timeout: 10)
+                .first()
 
-                default:
-                    break
-                }
-            })
-            .disposed(by: disposeBag)
+            // Receives pong
+            var randomNumber1 = Int64(arc4random())
+            let pongData = Data(bytes: &randomNumber1, count: MemoryLayout<Int64>.size)
+            socket.write(ping: pongData)
+            _ = try socket.rx.stream
+                .filter { $0 == .pong(pongData) }
+                .toBlocking(timeout: 10)
+                .first()
 
-        waitForExpectations(timeout: 30, handler: nil)
+            // Receives data
+            var randomNumber2 = Int64(arc4random())
+            let data = Data(bytes: &randomNumber2, count: MemoryLayout<Int64>.size)
+            socket.write(data: data)
+            _ = try socket.rx.stream
+                .filter { $0 == .data(data) }
+                .toBlocking(timeout: 10)
+                .first()
+
+            // Receives text
+            let message = "foobar"
+            socket.write(string: message)
+            _ = try socket.rx.stream
+                .filter { $0 == .text(message) }
+                .toBlocking(timeout: 10)
+                .first()
+
+            // Receives disconnect
+            socket.disconnect()
+            _ = try socket.rx.stream
+                .filter { $0 == .disconnect(nil) }
+                .toBlocking(timeout: 10)
+                .first()
+        }
+        catch let e {
+            XCTFail(e.localizedDescription)
+        }
+
+        do {
+            // Does not receive connect
+            _ = try socket.rx.stream
+                .filter { $0 == .connect }
+                .toBlocking(timeout: 10)
+                .first()
+
+            XCTFail("Shouldn't have connected")
+        }
+        catch _ {
+            // Did timeout as expected
+        }
     }
 
     // MARK: Binding
 
     func test__Send_Text() {
-        let message = "someMessage"
-        let exp = expectation(description: "Did receive sent message")
+        let messageString = "someMessage"
 
-        socket.rx.text
-            .take(1)
-            .subscribe(onNext: { text in
-                XCTAssertEqual(text, message)
-                exp.fulfill()
-            })
-            .disposed(by: disposeBag)
+        do {
+            _ = socket.rx.connect
+                .map { messageString }
+                .take(1)
+                .bind(to: socket.rx.text)
 
-        socket.rx.connect
-            .take(1)
-            .map { message }
-            .bind(to: socket.rx.text)
-            .disposed(by: disposeBag)
+            let result = try socket.rx.text
+                .toBlocking(timeout: 10)
+                .first()
 
-        waitForExpectations(timeout: 30, handler: nil)
+            XCTAssertEqual(result, messageString)
+        }
+        catch let e {
+            XCTFail(e.localizedDescription)
+        }
     }
 
     func test__Send_Data() {
-        let message = "someMessage".data(using: String.Encoding.utf8)!
-        let exp = expectation(description: "Did receive sent data")
+        let messageData = "someMessage".data(using: String.Encoding.utf8)!
 
-        socket.rx.data
-            .take(1)
-            .subscribe(onNext: { data in
-                XCTAssertEqual(data, message)
-                exp.fulfill()
-            })
-            .disposed(by: disposeBag)
+        do {
+            _ = socket.rx.connect
+                .map { messageData }
+                .take(1)
+                .bind(to: socket.rx.data)
 
-        socket.rx.connect
-            .take(1)
-            .map { message }
-            .bind(to: socket.rx.data)
-            .disposed(by: disposeBag)
+            let result = try socket.rx.data
+                .toBlocking(timeout: 10)
+                .first()
 
-        waitForExpectations(timeout: 30, handler: nil)
+            XCTAssertEqual(result, messageData)
+        }
+        catch let e {
+            XCTFail(e.localizedDescription)
+        }
+    }
+
+    func test__Multiple_Subscriptions() {
+        do {
+            // Disconnects and reconnects
+            _ = try socket.rx.connect
+                .flatMap { [unowned self] _ -> Observable<Error?> in
+                    defer { self.socket.disconnect() }
+                    return self.socket.rx.disconnect
+                }
+                .delay(0.1, scheduler: MainScheduler.instance)
+                .do(onNext: { [weak self] _ in
+                    self?.socket.connect()
+                })
+                .toBlocking(timeout: 10)
+                .first()
+        }
+        catch let e {
+            XCTFail(e.localizedDescription)
+        }
+
+        do {
+            _ = socket.rx.connect
+                .delay(0.1, scheduler: MainScheduler.instance)
+                .map { "foobar" }
+                .take(1)
+                .bind(to: socket.rx.text)
+
+            _ = try socket.rx.text.asObservable()
+                .timeout(1, scheduler: MainScheduler.instance)
+                .catchError { _ in .empty() } // Completes the sequence
+                .toBlocking(timeout: 10)
+                .single() // Checks if there's only 1 element
+        }
+        catch let e {
+            XCTFail(e.localizedDescription)
+        }
+    }
+
+    // MARK: Connect state
+
+    func test__Connect_State() {
+        do {
+            _ = try socket.rx.connect
+                .toBlocking(timeout: 1)
+                .first()
+
+            // Is still connected
+            _ = socket.rx.connect
+                .take(1)
+                .subscribe(onNext: { [weak socket] in
+                    socket?.disconnect()
+                })
+
+            _ = try socket.rx.disconnect
+                .flatMap { _ in self.socket.rx.connect }
+                .toBlocking(timeout: 1)
+                .first()
+
+            XCTFail("Shouldn't have connected")
+        }
+        catch _ {
+            // Did timeout as expected
+        }
     }
 }

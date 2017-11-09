@@ -6,10 +6,4 @@ use_frameworks!
 
 target 'RxWebSocket_Example' do
     pod 'RxWebSocket', :path => '../'
-
-    pod 'SwiftLint', '~> 0.23.1'
-
-    target 'RxWebSocket_Tests' do
-        inherit! :search_paths
-    end
 end
