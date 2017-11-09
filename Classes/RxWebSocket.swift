@@ -12,20 +12,10 @@ import RxSwift
 import Starscream
 
 
-/**
- *  This is the abstraction over Starscream to make it reactive.
- */
-public class RxWebSocket: WebSocket {
+/// This is the abstraction over Starscream to make it reactive.
+open class RxWebSocket: WebSocket {
 
-    /**
-     Every message received by the websocket is converted to an `StreamEvent`.
-     
-     - connect:    The "connect" message, flagging that the websocket did connect to the server.
-     - disconnect: A disconnect message that may contain an `Error` containing the reason for the disconection.
-     - pong:       The "pong" message the server may respond to a "ping".
-     - text:       Any string messages received by the client.
-     - data:       Any data messages received by the client, excluding strings.
-     */
+    /// Every message received by the websocket is converted to an `StreamEvent`.
     public enum StreamEvent {
         /// The "connect" message, flagging that the websocket did connect to the server.
         case connect
@@ -43,17 +33,17 @@ public class RxWebSocket: WebSocket {
         case data(Data)
     }
 
-    // MARK: Private Properties
-
     fileprivate let publishStream: PublishSubject<StreamEvent>
 
     /**
-     The creation of a `RxWebSocket` object. The client is automatically connected to the server uppon initialization.
-     
-     - parameter url:       The server url.
-     - parameter protocols: The protocols that should be used in the comms. May be nil.
-     
+     - parameters:
+         - request: A URL Request to be started.
+         - protocols: The protocols that should be used in the comms. May be nil.
+         - stream: A stream to which the client should connect.
+
      - returns: An instance of `RxWebSocket`
+
+     The creation of a `RxWebSocket` object. The client is automatically connected to the server uppon initialization.
      */
     override public init(request: URLRequest, protocols: [String]? = nil, stream: WSStream = FoundationStream()) {
         let publish = PublishSubject<StreamEvent>()
@@ -68,6 +58,22 @@ public class RxWebSocket: WebSocket {
         super.onPong = { publish.onNext(.pong($0)) }
 
         connect()
+    }
+
+    /**
+     - parameters:
+         - url: The server url.
+         - protocols: The protocols that should be used in the comms. May be nil.
+
+     - returns: An instance of `RxWebSocket`
+
+     The creation of a `RxWebSocket` object. The client is automatically connected to the server uppon initialization.
+     */
+    public convenience init(url: URL, protocols: [String]? = nil) {
+        self.init(
+            request: URLRequest(url: url),
+            protocols: protocols
+        )
     }
 }
 
@@ -84,12 +90,12 @@ public extension Reactive where Base: RxWebSocket {
             return Observable.just(text)
         }
 
-        return ControlProperty(values: values, valueSink: AnyObserver { event in
+        return ControlProperty(values: values, valueSink: AnyObserver { [weak base] event in
             guard case .next(let text) = event else {
                 return
             }
 
-            self.base.write(string: text)
+            base?.write(string: text)
         })
     }
 
@@ -103,12 +109,12 @@ public extension Reactive where Base: RxWebSocket {
             return Observable.just(data)
         }
 
-        return ControlProperty(values: values, valueSink: AnyObserver { event in
+        return ControlProperty(values: values, valueSink: AnyObserver { [weak base] event in
             guard case .next(let data) = event else {
                 return
             }
 
-            self.base.write(data: data)
+            base?.write(data: data)
         })
     }
 

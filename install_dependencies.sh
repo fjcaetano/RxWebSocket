@@ -19,22 +19,22 @@ verify() {
 install_fastlane() {
   echo "Installing Fastlane"
 
-  if [ $(which fastlane) ]; then
+  if [ $(which fastlane) ] || [ $(bundle check) ]; then
     echo ' -> Fastlane already installed'
     return
   fi
 
-  # Installing Homebrew
-  if [ ! $(which brew) ]; then
-    echo "Installing Homebrew"
-
-    # https://brew.sh/
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" > "$LOGS_PATH/fastlane.log"
+  # Bundle install
+  if [ $(which bundle ) ]; then
+    bundle install
+  else
+    gem install bundler
   fi
 
-  brew cask install fastlane
-
-  verify "fastlane"
+  if [ ! $(bundle check) ]; then
+    echo "ERROR: fastlane still not installed. Aborting"
+    exit 1
+  fi
 }
 
 # Autobahn Test Suite

@@ -15,11 +15,18 @@ A lightweight abstraction layer over [Starscream](https://github.com/daltoniam/S
 
 ## Installation
 
-RxWebSocket is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+RxWebSocket is available through [CocoaPods](http://cocoapods.org) and
+[Carthage](https://github.com/Carthage/Carthage). To install it, simply add the
+following line to your depedencies file:
 
+#### Cocoapods
 ``` ruby
 pod "RxWebSocket"
+```
+
+#### Carthage
+``` ruby
+github "fjcaetano/RxWebSocket"
 ```
 
 ## Usage
@@ -41,12 +48,12 @@ You may receive and send text events by subscribing to the `text` property:
 ``` swift
 let label = UILabel()
 socket.rx.text
-    .bindTo(label.rx.text)
+    .bind(to: label.rx.text)
 
 
 sendButton.rx.tap
     .flatMap { textField.text ?? "" }
-    .bindTo(socket.rx.text)
+    .bind(to: socket.rx.text)
 ```
 
 For further details, check the Example project.
