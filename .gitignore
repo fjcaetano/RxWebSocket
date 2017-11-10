@@ -3,6 +3,7 @@
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
 ## Build generated
+.build
 build/
 DerivedData
 
@@ -30,6 +31,7 @@ vendor
 ## Obj-C/Swift specific
 *.hmap
 *.ipa
+Package.resolved
 
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion
 

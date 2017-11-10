@@ -32,8 +32,11 @@ platform :ios do
     test
     tvOS
     macOS
+
+    # Package managers
     pod_lint
     carthage_lint
+    spm
   end
 
   desc "Runs all the tests"
@@ -179,6 +182,12 @@ platform :ios do
       project: "RxWebSocket.xcodeproj",
       destination: "platform=macOS",
     )
+  end
+
+  desc "Swift Package Manager compliance"
+  lane :spm do
+    sh "swift build"
+    sh "swift test"
   end
 
   after_all do |lane|

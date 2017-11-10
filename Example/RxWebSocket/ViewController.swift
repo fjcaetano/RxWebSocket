@@ -14,7 +14,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    // swiftlint:disable force_unwrapping
+    // swiftlint:disable:next force_unwrapping
     private let socket = RxWebSocket(url: URL(string: "ws://echo.websocket.org")!)
     private let disposeBag = DisposeBag()
 

@@ -63,6 +63,13 @@ install_wstest() {
   verify "wstest"
 }
 
+# Homebrew
+install_homebrew() {
+  if [ ! $(which homebrew) ]; then
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+}
+
 # Swiftlint
 install_swiftlint() {
   echo 'Installing swiftlint'
@@ -72,9 +79,23 @@ install_swiftlint() {
     return
   fi
 
+  install_homebrew
   exe brew install swiftlint
 
   verify "swiftlint"
+}
+
+# Carthage
+install_carthage() {
+  echo 'Installing Carthage'
+
+  if [ $(which carthage) ]; then
+    echo ' -> Carthage already installed'
+    return
+  fi
+
+  install_homebrew
+  exe brew install carthage
 }
 
 xcode_error() {
@@ -98,6 +119,7 @@ fi
 install_bundle
 install_wstest
 install_swiftlint
+install_carthage
 echo 'Success! All requirements are installed'
 
 touch build/.deps
