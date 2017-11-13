@@ -1,3 +1,9 @@
+# 2.0.0
+
+- Swift 4 support
+- Carthage compatibility
+- Swift Package Manager compatibility
+
 # 1.0.1
 
 - Forwarding error to `rx.disconnect`
