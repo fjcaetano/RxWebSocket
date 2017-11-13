@@ -105,8 +105,6 @@ platform :ios do
 
   desc "Deploy a new version to Github and Cocoapods"
   lane :release do
-    ci unless Helper.is_ci?
-
     carthage(
       command: "archive",
       frameworks: ["RxWebSocket"],
