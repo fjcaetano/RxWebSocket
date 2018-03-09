@@ -88,7 +88,8 @@ platform :ios do
   desc "Lint Cocoapods Lib"
   lane :pod_lint do
     cocoapods(
-      podfile: "Example/Podfile"
+      podfile: "Example/Podfile",
+      try_repo_update_on_error: true,
     )
 
     pod_lib_lint(
