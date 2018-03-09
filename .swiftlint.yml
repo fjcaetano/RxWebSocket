@@ -2,7 +2,8 @@ excluded:
   - Carthage
   - Example/Pods
   - vendor
-  - .build/
+  - build
+  - .build
 
 disabled_rules:
   - nesting

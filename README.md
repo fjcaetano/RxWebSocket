@@ -89,7 +89,7 @@ for testing, however if you find that tests are timing out, this is usually a
 sign that the server is not running. If so, you can manage it running
 
 ``` sh
-./server.sh [start|stop]
+./server.sh {start|stop|restart|status}
 ```
 
 This will tell wstests to launch an echo server on 127.0.0.1:9000. If this port

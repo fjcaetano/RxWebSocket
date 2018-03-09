@@ -27,7 +27,14 @@ platform :ios do
     )
   end
 
-  desc "Runs the following lanes:\n- test\n- pod_lint\n- carthage_lint"
+  desc """Runs the following lanes:
+  - test
+  - tvOS
+  - macOS
+  - pod_lint
+  - carthage_lint
+  - spm
+  """
   lane :ci do
     test
     tvOS
@@ -41,10 +48,10 @@ platform :ios do
 
   desc "Runs all the tests"
   lane :test do
-    devices = ["iPhone X (11.0)"]
-    devices << "iPhone 7 (10.0)" if !Helper.is_ci?
-    devices << "iPhone 6 (9.0)" if !Helper.is_ci?
-    devices << "iPhone 5s (8.1)" if !Helper.is_ci?
+    devices = ["iPhone X (~> 11.0)"]
+    devices << "iPhone 7 (~> 10.0)" if !Helper.is_ci?
+    devices << "iPhone 6 (~> 9.0)" if !Helper.is_ci?
+    devices << "iPhone 5s (~> 8.1)" if !Helper.is_ci?
 
     # The problem lies in the fact (or rather: serious bug in xcodebuild) that
     # the timeout for connecting to the XCTest server starts at the moment you
@@ -54,7 +61,7 @@ platform :ios do
     # https://stackoverflow.com/questions/37922146/xctests-failing-on-physical-device-canceling-tests-due-to-timeout/40790171#40790171
     scan(
       build_for_testing: true,
-      devices: devices,
+      devices: select_similar_simulator(devices),
       scheme: "RxWebSocket-iOS",
       project: "RxWebSocket.xcodeproj",
       code_coverage: true,
@@ -62,7 +69,7 @@ platform :ios do
 
     scan(
       test_without_building: true,
-      devices: devices,
+      devices: select_similar_simulator(devices),
       scheme: "RxWebSocket-iOS",
       project: "RxWebSocket.xcodeproj",
       code_coverage: true,
@@ -184,8 +191,18 @@ platform :ios do
 
   desc "Swift Package Manager compliance"
   lane :spm do
-    sh "swift build"
-    sh "swift test"
+    spm(
+      command: "reset",
+    )
+
+    spm(
+      command: "build",
+      verbose: true
+    )
+
+    spm(
+      command: "test",
+    )
   end
 
   after_all do |lane|
@@ -200,5 +217,19 @@ platform :ios do
       sh "../server.sh stop"
     rescue => e
     end
+  end
+
+  # Private
+
+  def select_similar_simulator(args)
+    args.map { |device_string|
+      pieces = device_string.split(' (')
+      FastlaneCore::Simulator.all
+        .select { |s| s.name == pieces.first }
+        .sort_by { |s| Gem::Version.create(s.os_version) }
+        .detect { |s| Gem::Requirement.new(pieces[1].tr('()', '')).satisfied_by?(Gem::Version.create(s.os_version)) }
+    }
+    .compact
+    .map { |s| "#{s.name} (#{s.ios_version})"}
   end
 end
