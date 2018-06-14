@@ -95,6 +95,11 @@ sign that the server is not running. If so, you can manage it running
 This will tell wstests to launch an echo server on 127.0.0.1:9000. If this port
 is unusable for you by any reason, you may change it in the `server.sh` file.
 
+## Help Wanted
+
+Do you love RxWebsocket and work actively on apps that use it? We'd love if you could help us keep improving it!
+Feel free to message us or to start contributing right away!
+
 ## License
 
 RxWebSocket is available under the MIT license. See the LICENSE file for more info.
