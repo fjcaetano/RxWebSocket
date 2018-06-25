@@ -41,12 +41,13 @@ open class RxWebSocket: WebSocket {
          - request: A URL Request to be started.
          - protocols: The protocols that should be used in the comms. May be nil.
          - stream: A stream to which the client should connect.
+         - shouldAutoConnect: An option to open connection right after initiation.
 
      - returns: An instance of `RxWebSocket`
 
      The creation of a `RxWebSocket` object. The client is automatically connected to the server uppon initialization.
      */
-    override public init(request: URLRequest, protocols: [String]? = nil, stream: WSStream = FoundationStream()) {
+    override public init(request: URLRequest, protocols: [String]? = nil, stream: WSStream = FoundationStream(), shouldAutoconnect: Bool = true) {
         let publish = PublishSubject<StreamEvent>()
         eventSubject = publish
 
@@ -61,7 +62,9 @@ open class RxWebSocket: WebSocket {
         super.onPong = { publish.onNext(.pong($0)) }
         super.onDisconnect = { replay.onNext(.disconnect($0)) }
 
-        connect()
+        if shouldAutoconnect {
+            connect()
+        }
     }
 
     /**
