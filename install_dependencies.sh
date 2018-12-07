@@ -46,11 +46,15 @@ install_wstest() {
       echo 'Creating virtual env'
       exe virtualenv "$(pwd)/venv"
     else
-      echo ' -> Virtual env not installed. Attempting to install anyway'
+      echo ' -> virtualenv not installed.'
     fi
   fi
 
-  exe source venv/bin/activate
+  if [ -f venv/bin/activate ]; then
+    exe source venv/bin/activate
+  else
+    echo ' -> Virtual env not found. Attempting to install anyway'
+  fi
 
   if [[ ! $(which pip) ]]; then
     echo 'Installing pip'
