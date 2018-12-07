@@ -27,6 +27,7 @@ xcuserdata
 venv/
 .bundle
 vendor
+.vscode
 
 ## Obj-C/Swift specific
 *.hmap

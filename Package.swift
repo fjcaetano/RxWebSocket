@@ -15,7 +15,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/ReactiveX/RxSwift.git",
-            .upToNextMajor(from: "4.0.0")
+            .upToNextMajor(from: "4.3.0")
         ),
         .package(
             url: "https://github.com/daltoniam/Starscream.git",

@@ -48,7 +48,8 @@ platform :ios do
 
   desc "Runs all the tests"
   lane :test do
-    devices = ["iPhone X (~> 11.0)"]
+    devices = ["iPhone XR (~> 12.1)"]
+    devices << "iPhone X (~> 11.0)" if !Helper.is_ci?
     devices << "iPhone 7 (~> 10.0)" if !Helper.is_ci?
     devices << "iPhone 6 (~> 9.0)" if !Helper.is_ci?
     devices << "iPhone 5s (~> 8.1)" if !Helper.is_ci?
@@ -93,7 +94,7 @@ platform :ios do
     )
 
     pod_lib_lint(
-      allow_warnings: true, # Remove this when Starscream stops warning
+      verbose: true,
     )
   end
 
@@ -141,9 +142,10 @@ platform :ios do
   desc "Runs tests against tvOS"
   lane :tvOS do
     devices = [
-      "Apple TV 4K (11.1)",
-      "Apple TV 1080p (10.0)",
-      "Apple TV 1080p (9.0)",
+      "Apple TV (~> 12.0)",
+      "Apple TV 4K (~> 11.0)",
+      "Apple TV 1080p (~> 10.0)",
+      "Apple TV 1080p (~> 9.0)",
     ]
 
     # The problem lies in the fact (or rather: serious bug in xcodebuild) that
@@ -154,14 +156,14 @@ platform :ios do
     # https://stackoverflow.com/questions/37922146/xctests-failing-on-physical-device-canceling-tests-due-to-timeout/40790171#40790171
     scan(
       build_for_testing: true,
-      devices: devices,
+      devices: select_similar_simulator(devices),
       scheme: "RxWebSocket-tvOS",
       project: "RxWebSocket.xcodeproj",
     )
 
     scan(
       test_without_building: true,
-      devices: devices,
+      devices: select_similar_simulator(devices),
       scheme: "RxWebSocket-tvOS",
       project: "RxWebSocket.xcodeproj",
     )

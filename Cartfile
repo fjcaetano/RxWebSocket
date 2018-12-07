@@ -1,2 +1,2 @@
-github "daltoniam/Starscream" "8f2af31bd3e87246d302d92d00b75b8ab6e9b512"
-github "ReactiveX/RxSwift" ~> 4.0
+github "daltoniam/Starscream" ~> 3.0
+github "ReactiveX/RxSwift" ~> 4.3
