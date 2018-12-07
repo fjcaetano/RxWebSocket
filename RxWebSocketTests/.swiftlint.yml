@@ -3,3 +3,4 @@ disabled_rules:
   - nesting
   - force_unwrapping
   - explicit_top_level_acl
+  - identifier_name
