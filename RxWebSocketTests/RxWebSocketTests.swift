@@ -56,7 +56,7 @@ class RxWebSocketTests: XCTestCase {
             // TODO
             // Starscream is returning `protocolError` for normal closing operations
             // https://github.com/daltoniam/Starscream/issues/488
-            XCTAssertEqual(error!.type, ErrorType.protocolError)
+            XCTAssertEqual(error?.type, ErrorType.protocolError)
         }
         catch let e {
             XCTFail(e.localizedDescription)

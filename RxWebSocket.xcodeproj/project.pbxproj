@@ -510,7 +510,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "sh \"${PROJECT_DIR}/server.sh\" start";
+			shellScript = "sh \"${PROJECT_DIR}/server.sh\" start\n";
 		};
 		F219FCD71FB4BA97000255A1 /* [WS] Start echoserver */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -524,7 +524,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "sh \"${PROJECT_DIR}/server.sh\" start";
+			shellScript = "sh \"${PROJECT_DIR}/server.sh\" start\n";
 		};
 		F219FCD81FB4C558000255A1 /* Check dependencies */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -595,7 +595,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "sh \"${PROJECT_DIR}/server.sh\" start\n";
+			shellScript = "#sh \"${PROJECT_DIR}/server.sh\" start\n";
 		};
 		F2312FE91FB206AE0038FA6A /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;

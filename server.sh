@@ -9,7 +9,7 @@ open_port_pid() {
 }
 
 is_running() {
-    [ -f "$pid_file" ] || [ ! -z $(open_port_pid) ]
+  [ ! -z "$(open_port_pid)" ]
 }
 
 case "$1" in
@@ -22,10 +22,17 @@ case "$1" in
       echo '\n-> Starting echoserver'
 
       LOGS=/tmp/wstest.log
-      venv/bin/wstest -m echoserver -w ws://127.0.0.1:$PORT > $LOGS 2>&1 &
+      python3 echoserver.py $PORT > $LOGS 2>&1 &
       echo "$!" > $pid_file
 
-      echo "Logs can be fount at $LOGS"
+      sleep .5
+
+      if ! is_running; then
+        echo 1
+        cat $LOGS
+      fi
+
+      echo "Logs can be found at $LOGS"
     ;;
     stop)
       if [ ! -f $pid_file ]; then

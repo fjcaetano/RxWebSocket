@@ -32,9 +32,9 @@ install_bundle() {
   fi
 }
 
-# Autobahn Test Suite
-install_wstest() {
-  echo 'Installing wstest'
+# Websocket server
+install_websocket() {
+  echo 'Installing Websocket server'
 
   if [[ -f venv/bin/wstest ]] || [ $(which wstest) ]; then
     echo ' -> wstest already installed'
@@ -44,7 +44,7 @@ install_wstest() {
   if [ ! -f venv/bin/activate ]; then
     if [[ $(which virtualenv) ]]; then
       echo 'Creating virtual env'
-      exe virtualenv "$(pwd)/venv"
+      exe virtualenv -p python3 "$(pwd)/venv"
     else
       echo ' -> virtualenv not installed.'
     fi
@@ -56,15 +56,13 @@ install_wstest() {
     echo ' -> Virtual env not found. Attempting to install anyway'
   fi
 
-  if [[ ! $(which pip) ]]; then
+  if [[ ! $(which pip3) ]]; then
     echo 'Installing pip'
     exe easy_install --user pip && export PATH=/Users/travis/Library/Python/2.7/bin:${PATH}
   fi
 
   echo 'Installing wstest'
-  exe pip install -r requirements.txt
-
-  verify "wstest"
+  exe pip3 install -r requirements.txt
 }
 
 # Homebrew
@@ -121,7 +119,7 @@ if [[ "$1" == 'verify' ]]; then
 fi
 
 install_bundle
-install_wstest
+install_websocket
 install_swiftlint
 install_carthage
 echo 'Success! All requirements are installed'

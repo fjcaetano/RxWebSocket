@@ -5,9 +5,9 @@ PODS:
   - RxSwift (4.4.0):
     - RxAtomic (~> 4.4)
   - RxWebSocket (2.0.0):
-    - RxCocoa (~> 4.0)
-    - RxSwift (~> 4.0)
-    - Starscream (~> 3.0)
+    - RxCocoa (~> 4.3)
+    - RxSwift (~> 4.3)
+    - Starscream (~> 3.0.6)
   - Starscream (3.0.6)
 
 DEPENDENCIES:
@@ -28,7 +28,7 @@ SPEC CHECKSUMS:
   RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
   RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
-  RxWebSocket: e8fef4ac562816a134e0a42cbab1b63a259488af
+  RxWebSocket: 77128a301abc8f13715bbf961f4fc9910429aa04
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
 
 PODFILE CHECKSUM: 3733fdc28b1729df6cd665082d17f2f11ed36bef
