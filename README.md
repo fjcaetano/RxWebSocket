@@ -7,7 +7,7 @@
 [![codecov](https://codecov.io/gh/fjcaetano/RxWebSocket/branch/master/graph/badge.svg)](https://codecov.io/gh/fjcaetano/RxWebSocket)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-------
+---
 
 Reactive extensions for websockets.
 
@@ -20,12 +20,14 @@ RxWebSocket is available through [CocoaPods](http://cocoapods.org) and
 following line to your depedencies file:
 
 #### Cocoapods
-``` ruby
+
+```ruby
 pod "RxWebSocket"
 ```
 
 #### Carthage
-``` ruby
+
+```ruby
 github "fjcaetano/RxWebSocket"
 ```
 
@@ -33,7 +35,7 @@ github "fjcaetano/RxWebSocket"
 
 Every websocket event will be sent to the `stream` which is an `Observable<StreamEvent>`.
 
-``` swift
+```swift
   public enum StreamEvent {
     case connect
     case disconnect(Error?)
@@ -45,7 +47,7 @@ Every websocket event will be sent to the `stream` which is an `Observable<Strea
 
 You may receive and send text events by subscribing to the `text` property:
 
-``` swift
+```swift
 let label = UILabel()
 socket.rx.text
     .bind(to: label.rx.text)
@@ -62,7 +64,7 @@ For further details, check the Example project.
 
 After cloning the project, pull all submodules with
 
-``` sh
+```sh
 git submodule update --init --recursive
 ```
 
@@ -70,13 +72,14 @@ git submodule update --init --recursive
 
 RxWebSocket relies on the following for development:
 
+- [Python 3.6](https://www.python.org/download/releases/3.0/)
 - [Fastlane](https://github.com/fastlane/fastlane)
-- [Autobahn TestSuite](https://github.com/crossbario/autobahn-testsuite)
+- [Python Websockets](https://github.com/aaugustin/websockets)
 - [Swiftlint](https://github.com/realm/SwiftLint)
 
 To install all dependencies without hassles just run:
 
-``` sh
+```sh
 ./install_dependencies.sh
 ```
 
@@ -88,7 +91,7 @@ Xcode and Fastlane will take care of starting and stopping websocket echoservers
 for testing, however if you find that tests are timing out, this is usually a
 sign that the server is not running. If so, you can manage it running
 
-``` sh
+```sh
 ./server.sh {start|stop|restart|status}
 ```
 
