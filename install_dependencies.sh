@@ -20,13 +20,18 @@ install_bundle() {
   echo 'Installing bundle'
 
   # Bundle install
-  if [ ! $(which bundle) ]; then
+  if ! which bundle > /dev/null; then
     exe gem install bundler
+  fi
+
+  if bundle check > /dev/null; then
+    echo " -> bundle dependencies already installed"
+    return
   fi
 
   exe bundle install
 
-  if [ ! $(bundle check) ]; then
+  if ! bundle check > /dev/null; then
     echo "ERROR: bundle still not installed. Aborting"
     exit 1
   fi
@@ -34,15 +39,10 @@ install_bundle() {
 
 # Websocket server
 install_websocket() {
-  echo 'Installing Websocket server'
-
-  if [[ -f venv/bin/wstest ]] || [ $(which wstest) ]; then
-    echo ' -> wstest already installed'
-    return
-  fi
+  echo 'Installing Python requirements'
 
   if [ ! -f venv/bin/activate ]; then
-    if [[ $(which virtualenv) ]]; then
+    if which virtualenv > /dev/null; then
       echo 'Creating virtual env'
       exe virtualenv -p python3 "$(pwd)/venv"
     else
@@ -56,18 +56,23 @@ install_websocket() {
     echo ' -> Virtual env not found. Attempting to install anyway'
   fi
 
-  if [[ ! $(which pip3) ]]; then
+  if [ "$(pip3 freeze)" = "$(cat requirements.txt)" ]; then
+    echo ' -> requirements already installed'
+    return
+  fi
+
+  if ! which pip3 > /dev/null; then
     echo 'Installing pip'
     exe easy_install --user pip && export PATH=/Users/travis/Library/Python/2.7/bin:${PATH}
   fi
 
-  echo 'Installing wstest'
+  echo 'Installing requirements'
   exe pip3 install -r requirements.txt
 }
 
 # Homebrew
 install_homebrew() {
-  if [ ! $(which homebrew) ]; then
+  if ! which homebrew > /dev/null; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
 }
@@ -76,7 +81,7 @@ install_homebrew() {
 install_swiftlint() {
   echo 'Installing swiftlint'
 
-  if [ $(which swiftlint) ]; then
+  if which swiftlint > /dev/null; then
     echo ' -> Swiftlint already installed'
     return
   fi
@@ -91,7 +96,7 @@ install_swiftlint() {
 install_carthage() {
   echo 'Installing Carthage'
 
-  if [ $(which carthage) ]; then
+  if which carthage > /dev/null; then
     echo ' -> Carthage already installed'
     return
   fi

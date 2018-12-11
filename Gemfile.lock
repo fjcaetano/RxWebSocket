@@ -190,4 +190,4 @@ DEPENDENCIES
   fastlane (~> 2.74.0)
 
 BUNDLED WITH
-   1.16.5
+   1.17.2
