@@ -28,9 +28,9 @@ SPEC CHECKSUMS:
   RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
   RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
-  RxWebSocket: 8e468d5b4ad658475e335a6c295ca1c816d8b358
+  RxWebSocket: d25bcd26302ce0a8ec39fc6dc6d9ed466eb1b103
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
 
 PODFILE CHECKSUM: 3733fdc28b1729df6cd665082d17f2f11ed36bef
 
-COCOAPODS: 1.6.0.beta.2
+COCOAPODS: 1.7.1

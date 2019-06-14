@@ -156,7 +156,7 @@ public extension Reactive where Base: RxWebSocket {
     }
 
     /// The stream of messages received by the websocket.
-    public var stream: Observable<Base.StreamEvent> {
+    var stream: Observable<Base.StreamEvent> {
         return Observable.merge(base.connectSubject, base.eventSubject)
     }
 }
