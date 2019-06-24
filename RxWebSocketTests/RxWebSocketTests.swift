@@ -237,7 +237,7 @@ class RxWebSocketTests: XCTestCase {
                     defer { self.socket.disconnect() }
                     return self.socket.rx.disconnect
                 }
-                .delay(0.1, scheduler: MainScheduler.instance)
+                .delay(.milliseconds(100), scheduler: MainScheduler.instance)
                 .do(onNext: { [weak self] _ in
                     self?.socket.connect()
                 })
@@ -250,13 +250,13 @@ class RxWebSocketTests: XCTestCase {
 
         do {
             _ = socket.rx.connect
-                .delay(0.1, scheduler: MainScheduler.instance)
+                .delay(.milliseconds(100), scheduler: MainScheduler.instance)
                 .map { "foobar" }
                 .take(1)
                 .bind(to: socket.rx.text)
 
             _ = try socket.rx.text.asObservable()
-                .timeout(1, scheduler: MainScheduler.instance)
+                .timeout(.seconds(1), scheduler: MainScheduler.instance)
                 .catchError { _ in .empty() } // Completes the sequence
                 .toBlocking(timeout: 3)
                 .single() // Checks if there's only 1 element
