@@ -1,22 +1,9 @@
-#
-# Be sure to run `pod lib lint RxWebSocket.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
   s.name             = "RxWebSocket"
-  s.version          = "2.1.0"
+  s.version          = "2.2.0"
   s.summary          = "Reactive WebSockets"
   s.swift_version    = "5.0"
 
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description      = <<-DESC
   Reactive extensions for websockets.
 
@@ -40,7 +27,7 @@ Pod::Spec.new do |s|
 
   s.source_files = 'Classes/**/*'
 
-# Dependencies
+  # Dependencies
 
   s.dependency 'Starscream', '~> 3.0.6'
   s.dependency 'RxSwift', '~> 5.0'

@@ -5,7 +5,7 @@ PODS:
   - RxRelay (5.0.0):
     - RxSwift (~> 5)
   - RxSwift (5.0.0)
-  - RxWebSocket (2.1.0):
+  - RxWebSocket (2.2.0):
     - RxCocoa (~> 5.0)
     - RxSwift (~> 5.0)
     - Starscream (~> 3.0.6)
@@ -29,7 +29,7 @@ SPEC CHECKSUMS:
   RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
   RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
-  RxWebSocket: 29744dd97b4feb1fe7c00c1e26d3e8d791bad3a4
+  RxWebSocket: 2994bf85e54a6a2a7e224a28a08ea2845a931565
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
 
 PODFILE CHECKSUM: 3733fdc28b1729df6cd665082d17f2f11ed36bef

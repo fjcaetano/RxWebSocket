@@ -1,3 +1,7 @@
+# 2.2.0
+
+- Swift 5.0 support
+
 # 2.1.0
 
 - Swift 4.2 support
