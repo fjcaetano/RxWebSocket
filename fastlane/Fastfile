@@ -28,7 +28,7 @@ platform :ios do
   - macOS
   - pod_lint
   - carthage_lint
-  - spm
+  - spm_lint
   """
   lane :ci do
     test
@@ -38,16 +38,16 @@ platform :ios do
     # Package managers
     pod_lint
     carthage_lint
-    spm
+    spm_lint
   end
 
   desc "Runs all the tests"
   lane :test do
-    devices = ["iPhone XR (~> 12.1)"]
-    devices << "iPhone X (~> 11.0)" if !Helper.is_ci?
-    devices << "iPhone 7 (~> 10.0)" if !Helper.is_ci?
-    devices << "iPhone 6 (~> 9.0)" if !Helper.is_ci?
-    devices << "iPhone 5s (~> 8.1)" if !Helper.is_ci?
+    devices = ["iPhone XR (~> 12)"]
+    # devices << "iPhone X (~> 11.0)" if !Helper.is_ci?
+    # devices << "iPhone 7 (~> 10.0)" if !Helper.is_ci?
+    # devices << "iPhone 6 (~> 9.0)" if !Helper.is_ci?
+    # devices << "iPhone 5s (~> 8.1)" if !Helper.is_ci?
 
     # The problem lies in the fact (or rather: serious bug in xcodebuild) that
     # the timeout for connecting to the XCTest server starts at the moment you
@@ -137,10 +137,10 @@ platform :ios do
   desc "Runs tests against tvOS"
   lane :tvOS do
     devices = [
-      "Apple TV (~> 12.0)",
-      "Apple TV 4K (~> 11.0)",
-      "Apple TV 1080p (~> 10.0)",
-      "Apple TV 1080p (~> 9.0)",
+      "Apple TV (~> 12)",
+      "Apple TV (~> 11)",
+      "Apple TV (~> 10)",
+      "Apple TV (~> 9)",
     ]
 
     # The problem lies in the fact (or rather: serious bug in xcodebuild) that
@@ -151,14 +151,14 @@ platform :ios do
     # https://stackoverflow.com/questions/37922146/xctests-failing-on-physical-device-canceling-tests-due-to-timeout/40790171#40790171
     scan(
       build_for_testing: true,
-      devices: select_similar_simulator(devices),
+      devices: select_similar_simulator(devices, FastlaneCore::SimulatorTV),
       scheme: "RxWebSocket-tvOS",
       project: "RxWebSocket.xcodeproj",
     )
 
     scan(
       test_without_building: true,
-      devices: select_similar_simulator(devices),
+      devices: select_similar_simulator(devices, FastlaneCore::SimulatorTV),
       scheme: "RxWebSocket-tvOS",
       project: "RxWebSocket.xcodeproj",
     )
@@ -188,7 +188,7 @@ platform :ios do
   end
 
   desc "Swift Package Manager compliance"
-  lane :spm do
+  lane :spm_lint do
     spm(
       command: "reset",
     )
@@ -219,10 +219,10 @@ platform :ios do
 
   # Private
 
-  def select_similar_simulator(args)
+  def select_similar_simulator(args, provider=FastlaneCore::Simulator)
     args.map { |device_string|
       pieces = device_string.split(' (')
-      FastlaneCore::Simulator.all
+      provider.all
         .select { |s| s.name == pieces.first }
         .sort_by { |s| Gem::Version.create(s.os_version) }
         .detect { |s| Gem::Requirement.new(pieces[1].tr('()', '')).satisfied_by?(Gem::Version.create(s.os_version)) }
