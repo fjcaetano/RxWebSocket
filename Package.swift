@@ -15,11 +15,11 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/ReactiveX/RxSwift.git",
-            .upToNextMajor(from: "4.3.0")
+            .upToNextMajor(from: "5.0.0")
         ),
         .package(
             url: "https://github.com/daltoniam/Starscream.git",
-            .upToNextMajor(from: "3.0.0")
+            .upToNextMajor(from: "3.1.0")
         )
     ],
     targets: [
