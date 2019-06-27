@@ -98,6 +98,34 @@ sign that the server is not running. If so, you can manage it running
 This will tell wstests to launch an echo server on 127.0.0.1:9000. If this port
 is unusable for you by any reason, you may change it in the `server.sh` file.
 
+### Upgrading to a new Swift version
+
+Upgrading a new Swift version requires upgrading the dependencies as well. Since the RxWebSocket is
+distributed through Cocoapods, Carthage and Swift Package Manager, the dependencies must be upgraded
+in the corresponding spec file for the three platforms:
+
+#### Cocoapods
+
+In RxWebSocket.podspec, update `swift_version` and the dependencies' versions at the end of the file
+
+#### Carthage
+
+Upgrade the dependencies' versions in `Cartfile`
+
+#### Swift Package Manager
+
+Upgrade the dependencies' versions in `Package.swift`
+
+### Housekeeping
+
+Before commiting, make sure to run, at least, the `test` lane on Fastlane. This will run all iOS
+tests.
+
+If you want to be thorough, which is recommended and appreciated, run the `ci` lane, which is the
+same lane Travis runs when testing PRs. This lane will run tests for iOS, tvOS and macOS, as well as
+lint the project for the three package managers. If this lane passes, you can be 100% sure everything
+is running as smoothly as possible.
+
 ## Help Wanted
 
 Do you love RxWebsocket and work actively on apps that use it? We'd love if you could help us keep improving it!
