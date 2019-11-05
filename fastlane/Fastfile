@@ -71,14 +71,10 @@ platform :ios do
       code_coverage: true,
     )
 
-    if Helper.is_ci?
-      codecov(
-        project_name: 'RxWebSocket',
-        use_xcodeplist: true,
-      )
-    else
-      puts "Not CI: Skipping coverage files upload"
-    end
+    codecov(
+      project_name: 'RxWebSocket',
+      use_xcodeplist: true,
+    )
   end
 
   desc "Lint Cocoapods Lib"
