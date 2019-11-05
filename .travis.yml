@@ -6,6 +6,7 @@ python:
 cache:
   directories:
     - Carthage
+    - Example/Pods
 
 install:
   - ./install_dependencies.sh
