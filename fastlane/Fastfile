@@ -72,7 +72,7 @@ platform :ios do
     )
 
     codecov(
-      project_name: 'RxWebSocket',
+      project_name: 'RxWebSocket-iOS',
       use_xcodeplist: true,
     )
   end
