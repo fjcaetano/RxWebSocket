@@ -71,6 +71,12 @@ platform :ios do
       code_coverage: true,
     )
 
+    slather(
+      proj: 'RxWebSocket.xcodeproj',
+      scheme: 'RxWebSocket-iOS',
+      cobertura_xml: true,
+    )
+
     codecov(
       project_name: 'RxWebSocket',
       use_xcodeplist: true,

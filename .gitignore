@@ -6,6 +6,7 @@
 .build
 build/
 DerivedData
+cobertura.xml
 
 ## Various settings
 *.pbxuser
